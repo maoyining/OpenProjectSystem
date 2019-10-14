@@ -1,0 +1,6 @@
+./test/lifecycle.test.js
+./test/integration/**/*.test.js
+--reporter spec
+--recursive
+--timeout 10s
+--exit

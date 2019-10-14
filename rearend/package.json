@@ -1,0 +1,51 @@
+{
+  "name": "cm-project",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "keywords": [],
+  "dependencies": {
+    "@sailshq/connect-redis": "^3.2.1",
+    "@sailshq/lodash": "^3.10.3",
+    "@sailshq/socket.io-redis": "^5.2.0",
+    "grunt": "1.0.4",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.11",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "sails": "^1.2.3",
+    "sails-hook-grunt": "^4.0.0",
+    "sails-hook-mongoat": "^2.0.0",
+    "sails-hook-organics": "^1.0.0",
+    "sails-hook-orm": "^2.1.1",
+    "sails-hook-sockets": "^2.0.0",
+    "sails-mongo": "^1.0.1",
+    "winston-daily-rotate-file": "1.0.1",
+    "xlsx": "^0.14.3"
+  },
+  "devDependencies": {
+    "eslint": "5.16.0",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^5.2.0",
+    "pow-mongodb-fixtures": "^0.14.0",
+    "supertest": "^3.1.0"
+  },
+  "scripts": {
+    "start": "NODE_ENV=production node app.js",
+    "test": "./node_modules/.bin/mocha",
+    "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
+    "custom-tests": "echo \"(No other custom tests yet.)\" && echo"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yfwu/cm-project.git"
+  },
+  "author": "yfwu",
+  "license": "",
+  "engines": {
+    "node": "^9.5"
+  }
+}
