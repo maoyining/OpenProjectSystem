@@ -22,4 +22,4 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 团队成员
 - 卯
-
+冯文超
