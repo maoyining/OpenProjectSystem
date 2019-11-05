@@ -14,6 +14,7 @@ module.exports.routes = {
   'GET /api/v1/auth/me': 'auth.me',
   'PUT /api/v1/auth/update-password': 'auth.update-password',
 
+  'POST /api/v1/project':'project.add'
 
 
 

@@ -70,7 +70,7 @@ module.exports = {
     project:{
       collection:'project',
       via:'user',
-      through:'UserProject'
+      through:'userproject'
     },
 
   },
