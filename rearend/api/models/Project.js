@@ -21,6 +21,47 @@ module.exports = {
       via:'project',
       through:'UserProject'
     },
+    //项目名称
+    name:{
+      type:'string',
+      required: true,
+      maxLength: 200
+    },
+    //项目参与者
+    partner:{
+      collection:'user',
+      via:'project',
+      through:'UserProject'
+    },
+    //导师
+    leader:{
+      collection:'user',
+      via:'project',
+      through:'UserProject'
+    },
+    //技术领域
+    field:{
+      type:'json',
+    },
+    //项目描述
+    description:{
+      type:'string'
+    },
+    /*
+      项目状态
+      0 发布
+      1 进行中
+      2 结项
+    */
+    status:{
+      type:'number',
+      defaultsTo:0
+    },
+    //团队最大人数，默认为5
+    teamSize:{
+      type:'number',
+      defaultsTo:5,
+    }
 
   },
 
