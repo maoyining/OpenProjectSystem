@@ -28,7 +28,8 @@ module.exports = {
 
   fn: async function (inputs, exits) {
 
-
+    let initialValues=[];
+    await Something.createEach(initialValues);
     return exits.success();
 
   }
