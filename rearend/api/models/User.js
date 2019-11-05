@@ -25,9 +25,16 @@ module.exports = {
       protect: true
     },
 
+    //学号
+    no:{
+      type:'string',
+      required:true,
+      maxLength:8
+    },
+
     // 1: web admin
-    // 2: 单证员
-    // 3: 仓管员
+    // 2: student
+    // 3: teacher
     role: {
       type: 'number',
       required: true
