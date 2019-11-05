@@ -1,7 +1,6 @@
 /**
- * User.js
+ * Project.js
  *
- * A user who can log in to this application.
  */
 
 module.exports = {
@@ -12,64 +11,14 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    username: {
-      type: 'string',
-      unique: true,
-      required: true,
-      maxLength: 200
-    },
 
-    password: {
-      type: 'string',
-      required: true,
-      protect: true
-    },
-
-    //学号
-    no:{
-      type:'string',
-      required:true,
-      maxLength:8,
-      unique:true
-    },
-
-    // 1: web admin
-    // 2: student
-    // 3: teacher
-    role: {
-      type: 'number',
-      defaultsTo:2
-    },
-
-    academy:{
-      type:'string',
-      required:true
-    },
-
-    field:{
-      type:'json',
-    },
-
-    description:{
-      type:'string'
-    },
-
-    phone:{
-      type:'string',
-      required:true
-    },
-
-    gender:{
-      type:'number',
-      defaultsTo:1,
-    },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    project:{
-      collection:'project',
-      via:'user',
+    user:{
+      collection:'user',
+      via:'project',
       through:'UserProject'
     },
 

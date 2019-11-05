@@ -35,7 +35,10 @@ module.exports = {
     const users = [{
       username: 'admin',
       password: 'admin123',
-      role: constants.ROLE_ADMIN
+      role: constants.ROLE_ADMIN,
+      no:'00000000',
+      academy:'null',
+      phone:'0000000-0000'
     }];
 
     let createdUsers = [];
@@ -48,9 +51,7 @@ module.exports = {
       }
       createdUsers.push(found);
     }
-
     return exits.success();
-
   }
 
 

@@ -29,7 +29,23 @@ module.exports = {
   fn: async function (inputs, exits) {
 
     let initialValues=[];
-    await Something.createEach(initialValues);
+    let xlsxFile = XLSX.readFile('scripts/student.xlsx');
+    let sheets = Object.keys(xlsxFile.Sheets);
+    let sheetName = sheets[0];
+    let content=[];
+    content = xlsxFile.Sheets[sheetName];
+    const header = ['no', 'gender','username', 'password','academy','phone'];
+    content = XLSX.utils.sheet_to_json(content, { header: header });
+    content.shift();
+    initialValues=content.map(v=>{
+      v.genger=1;
+      if(v.gender==='女'){
+        v.gender=2;
+      }
+      return v;
+    });
+    console.log(initialValues);
+    await User.createEach(initialValues);
     return exits.success();
 
   }
