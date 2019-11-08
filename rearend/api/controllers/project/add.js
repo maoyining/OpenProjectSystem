@@ -20,7 +20,6 @@ module.exports = {
   fn: async function () {
 
     let values = sails.helpers.filterValuesToSet(this.req);
-
     await Project.create(values);
     return;
 
