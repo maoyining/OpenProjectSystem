@@ -1,4 +1,4 @@
-# wh-project
+# Project Manage
 
 a [Sails v1](https://sailsjs.com) application
 
