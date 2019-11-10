@@ -1,14 +1,18 @@
 module.exports = {
 
 
-  friendlyName: 'student apply for project',
+  friendlyName: 'teacher invite student to join project',
 
 
   description: '',
 
 
   inputs: {
-    id:{
+    pid:{
+      type:'string',
+      required:true
+    },
+    uid:{
       type:'string',
       required:true
     }
@@ -25,16 +29,16 @@ module.exports = {
   fn: async function (inputs) {
 
     let p = await Project.findOne({
-      id:inputs.id
+      id:inputs.pid
     });
 
     if(p.currentSize===p.teamSize){
       throw 'conflict';
     }
     await UserProject.create({
-      user:this.req.me.id,
-      project:inputs.id,
-      status:3
+      user:inputs.uid,
+      project:inputs.pid,
+      status:4
     });
     return;
 

@@ -16,25 +16,17 @@ module.exports = {
 
 
   exits: {
-    conflict:{
-      responseType: 'conflict'
-    }
+
   },
 
 
   fn: async function (inputs) {
 
-    let p = await Project.findOne({
-      id:inputs.id
-    });
-
-    if(p.currentSize===p.teamSize){
-      throw 'conflict';
-    }
-    await UserProject.create({
+    await UserProject.update({
       user:this.req.me.id,
       project:inputs.id,
-      status:3
+    }).set({
+      status:8
     });
     return;
 

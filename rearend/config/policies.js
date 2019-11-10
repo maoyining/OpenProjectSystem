@@ -21,7 +21,9 @@ module.exports.policies = {
   // 'auth/update-password':  ['is-authenticated'],
 
   '*': ['is-authenticated'],
-
+  'student/*':['is-authenticated','is-student'],
+  'teacher/*':['is-authenticated','is-teacher'],
+  'admin/*':['is-authenticated','is-web-admin'],
   'auth/signin': true,
 
 

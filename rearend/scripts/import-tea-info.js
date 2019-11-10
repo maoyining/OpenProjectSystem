@@ -24,12 +24,12 @@ const XLSX = require('xlsx');
 module.exports = {
 
 
-  friendlyName: 'import student information',
+  friendlyName: 'import teacher information',
 
   fn: async function (inputs, exits) {
 
     let initialValues=[];
-    let xlsxFile = XLSX.readFile('scripts/student.xlsx');
+    let xlsxFile = XLSX.readFile('scripts/teacher.xlsx');
     let sheets = Object.keys(xlsxFile.Sheets);
     let sheetName = sheets[0];
     let content=[];
@@ -37,13 +37,13 @@ module.exports = {
     const header = ['no', 'gender','username', 'password','academy','phone'];
     content = XLSX.utils.sheet_to_json(content, { header: header });
     content.shift();
-
     initialValues=content.map(v=>{
       if(v.gender==='female'){
         v.gender=2;
       }else{
         v.gender=1;
       }
+      v.role=3;
       return v;
     });
     await User.createEach(initialValues);

@@ -36,6 +36,10 @@ module.exports = {
       defaultsTo:5,
     },
 
+    currentSize:{
+      type:'number',
+      defaultsTo:1
+    },
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
@@ -48,7 +52,6 @@ module.exports = {
     //导师
     leader:{
       model:'user',
-      unique:true
     },
 
   },

@@ -27,7 +27,7 @@ module.exports.attributesWhitelist = {
   // 'auth/me': {
   //   select: ['id', 'username', 'avatar', 'no', 'description', 'country', 'city', 'gender', 'stats','role']
   // },
-  'project/add':['name','description','teamSize','field']
+  'admin/add-project':['name','description','teamSize','field']
   // 'admin/add-user':['username','password','role','stats','avatar','no','description','country','city','gender','status','fbuid','twuid','inuid'],
 
 

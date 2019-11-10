@@ -1,7 +1,7 @@
 module.exports = {
 
 
-  friendlyName: 'student apply for project',
+  friendlyName: 'teacher apply for project',
 
 
   description: '',
@@ -16,25 +16,16 @@ module.exports = {
 
 
   exits: {
-    conflict:{
-      responseType: 'conflict'
-    }
+
   },
 
 
   fn: async function (inputs) {
 
-    let p = await Project.findOne({
-      id:inputs.id
-    });
-
-    if(p.currentSize===p.teamSize){
-      throw 'conflict';
-    }
     await UserProject.create({
       user:this.req.me.id,
       project:inputs.id,
-      status:3
+      status:1
     });
     return;
 

@@ -56,8 +56,8 @@ global.ObjectId = require('mongodb').ObjectID;
 global.constants = {
   // User role
   ROLE_ADMIN: 1,
-  ROLE_OFFICER: 2,
-  ROLE_OPERATOR: 3,
+  ROLE_STUDENT: 2,
+  ROLE_TEACHER: 3,
 
   ENTRY_STATUS_STANDBY: 1,  // 未开始
   ENTRY_STATUS_TRANSIT: 2,  // 运输中

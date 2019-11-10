@@ -1,7 +1,7 @@
 module.exports = (req, res, next) => {
 
   User.findOne({
-    user: req.me.id
+    id: req.me.id
   })
   .exec((err, user) => {
     if (err) { return next(err); }

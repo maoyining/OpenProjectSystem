@@ -16,25 +16,21 @@ module.exports = {
 
 
   exits: {
-    conflict:{
-      responseType: 'conflict'
-    }
+
   },
 
 
   fn: async function (inputs) {
 
-    let p = await Project.findOne({
-      id:inputs.id
-    });
+    let db = Project.getDatastore().manager;
+    var ProjectCollection = db.collection(Project.tableName);
+    await ProjectCollection.findOneAndUpdate({_id:new ObjectId(inputs.id)},{$inc:{'currentSize':1}});
 
-    if(p.currentSize===p.teamSize){
-      throw 'conflict';
-    }
-    await UserProject.create({
+    await UserProject.update({
       user:this.req.me.id,
       project:inputs.id,
-      status:3
+    }).set({
+      status:5
     });
     return;
 

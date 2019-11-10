@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
   .exec((err, user) => {
     if (err) { return next(err); }
 
-    if (!user || user.role !== constants.ROLE_STUDENT) {
+    if (!user || user.role !== constants.ROLE_TEACHER) {
       return res.forbidden();
     }
 
