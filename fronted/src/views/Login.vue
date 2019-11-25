@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1 style="margin-top:160px;">Charme Manage Platform</h1>
-    <el-form @keyup.native.enter="Login()" ref="loginForm"  :model="loginForm" :rules="loginRules" style="margin-top:50px;margin-left:420px;margin-right:420px">
+    <h1 class="loginTitle">项目管理系统</h1>
+    <el-form  ref="loginForm"  :model="loginForm" :rules="loginRules" style="margin-top:50px;margin-left:420px;margin-right:420px">
     <el-form-item prop="username">
     <el-input 
       placeholder="用户名"
@@ -20,10 +20,11 @@
       prefix-icon="el-icon-lock"
       v-model="loginForm.password" 
       show-password
-      size="9px">
+      size="9px"
+      @keyup.native.enter="Login()">
     </el-input>
     </el-form-item>
-    <el-button class="Loginbtn" @click="Login()">登录</el-button>
+    <el-button class="loginBtn" @click="Login()">登录</el-button>
     </el-form>
   </div>
 </template>
@@ -107,11 +108,14 @@ h1{
     margin-top:30px;
     color:#606266
   }
-.Loginbtn{
+.loginBtn{
     width:100%;
     height:40px;
     margin-top:30px;
     background-color:#F55D54;
     color:white
+}
+.loginTitle{
+    margin-top:160px;
 }
 </style>
