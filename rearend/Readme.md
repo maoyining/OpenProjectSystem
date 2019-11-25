@@ -26,3 +26,5 @@ Note:  Generators are usually run using the globally-installed `sails` CLI (comm
 ![image](https://github.com/maoyining/OpenProjectSystem/blob/master/rearend/%E9%A1%B9%E7%9B%AE%E4%BA%A4%E6%8E%A5%E5%9B%BE.jpg)
 
 ![image](https://github.com/AngelSXD/sxd_first_repository/blob/master/images/20160615165142.png)
+### 启动
+` sails lift`

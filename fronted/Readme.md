@@ -28,3 +28,12 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 团队成员
 - 卯
 冯文超
+项目状态
+1. 项目刚发布，还没有老师接
+tag:已发布
+2. 老师接了，正在招募项目成员
+tag:招募中
+3. 项目成员招募完成，项目未完成
+tag:进行中
+4. 项目已完成
+tag:已结束
