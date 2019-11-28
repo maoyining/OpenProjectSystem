@@ -27,7 +27,10 @@ module.exports.attributesWhitelist = {
   // 'auth/me': {
   //   select: ['id', 'username', 'avatar', 'no', 'description', 'country', 'city', 'gender', 'stats','role']
   // },
-  'admin/add-project':['name','description','teamSize','field']
+  'admin/add-project':['name','description','teamSize','field','deadline'],
+  'teacher/my-project':{
+    select:['name','status','teamSize','currentSize']
+  }
   // 'admin/add-user':['username','password','role','stats','avatar','no','description','country','city','gender','status','fbuid','twuid','inuid'],
 
 

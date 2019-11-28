@@ -35,7 +35,8 @@ module.exports = {
     await Project.update({
       id:inputs.pid
     }).set({
-      leader:inputs.uid
+      leader:inputs.uid,
+      status:1
     });
     return;
 

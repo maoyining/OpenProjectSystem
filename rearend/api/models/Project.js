@@ -38,7 +38,12 @@ module.exports = {
 
     currentSize:{
       type:'number',
-      defaultsTo:1
+      defaultsTo:0
+    },
+
+    deadline:{
+      type:'string',
+      required: true
     },
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
@@ -53,6 +58,7 @@ module.exports = {
     leader:{
       model:'user',
     },
+
 
   },
 
