@@ -5,7 +5,6 @@ Vue.use(Vuex);
 const state={
     token: localStorage.getItem('user-token'),
     role:'',
-    
 };
 const getters={
     getToken(){
