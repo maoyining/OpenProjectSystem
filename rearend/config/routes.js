@@ -10,11 +10,10 @@
  */
 
 module.exports.routes = {
-  //DONE
+  //AUTH
   'POST /api/v1/auth/signin': 'auth.signin',
   'GET /api/v1/auth/me': 'auth.me',
   'PUT /api/v1/auth/update/password': 'auth.update-password',
-
 
   //ADMIN DONE
   'POST /api/v1/admin/project':'admin.add-project',
@@ -34,8 +33,13 @@ module.exports.routes = {
   'POST /api/v1/teacher/student/invite':'teacher.invite-student',
   'GET /api/v1/teacher/project':'teacher.my-project',
 
-  //PROJECT  for HSR
+  //PROJECT
   'GET /api/v1/project/:id':'project.find-one',
-  'GET /api/v1/project':'project.find-list'
+  'GET /api/v1/project':'project.find-list',
+
+  //USER
+  'GET /api/v1/user':'auth.findlist-user',
+  'GET /api/v1/user/:id':'auth.findone-user',
+  'PUT /api/v1/user':'auth.update-user'
 
 };

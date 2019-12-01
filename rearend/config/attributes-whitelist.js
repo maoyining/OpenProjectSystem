@@ -33,7 +33,14 @@ module.exports.attributesWhitelist = {
   },
   'project/find-list':{
     select:['name','status','teamSize','currentSize']
+  },
+  'auth/findlist-user':{
+    select:['username','role','academy','gender']
+  },
+  'auth/findone-user':{
+    select:['username','role','academy','field','description','phone','gender']
   }
+
   // 'admin/add-user':['username','password','role','stats','avatar','no','description','country','city','gender','status','fbuid','twuid','inuid'],
 
 
