@@ -8,7 +8,9 @@ module.exports = {
 
 
   inputs: {
-
+    id:{
+      type:'string'
+    }
   },
 
 
@@ -17,18 +19,11 @@ module.exports = {
   },
 
 
-  fn: async function (inputs, exits) {
+  fn: async function (inputs) {
 
-    let query = {
-      where: {
-        id: this.req.me.id
-      },
-      select: ['id', 'username', 'role']
-    };
+    let project = await Project.findOne({id:inputs.id});
 
-    let user = await User.findOne(query);
-
-    return exits.success(user);
+    return project;
 
   }
 
