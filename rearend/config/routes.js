@@ -1,4 +1,5 @@
-/**
+/* eslint-disable linebreak-style */
+/*
  * Route Mappings
  * (sails.config.routes)
  *
@@ -20,12 +21,10 @@ module.exports.routes = {
   'PUT /api/v1/admin/agree':'admin.agree-project',
   'PUT /api/v1/admin/disprove':'admin.disprove-project',
 
-
-  //学生申请参加项目,在userproject表中建立一条记录，此时表中的status字段为0，表示学生已申请但未受理
   //STUDENT
   'POST /api/v1/student/project':'student.apply-project', //DONE
-  'PUT /api/v1/student/project/agree':'student.agree-project',//修改status字段为2表示申请成功学生已在项目组中
-  'PUT /api/v1/student/project/disagree':'student.disagree-project',//修改status字段为4
+  'PUT /api/v1/student/project/agree':'student.agree-project',
+  'PUT /api/v1/student/project/disagree':'student.disagree-project',
   'GET /api/v1/student/project':'student.my-project',
 
   //TEACHER
@@ -37,6 +36,6 @@ module.exports.routes = {
 
   //PROJECT  for HSR
   'GET /api/v1/project/:id':'project.find-one',
-  'GET /api/v1/project':'project.find-lists'
+  'GET /api/v1/project':'project.find-list'
 
 };

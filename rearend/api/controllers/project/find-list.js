@@ -16,18 +16,15 @@ module.exports = {
   },
 
 
-  fn: async function (inputs, exits) {
+  fn: async function () {
 
+    let attributesToSelect = sails.helpers.getAttributesToSelect(this.req);
     let query = {
-      where: {
-        id: this.req.me.id
-      },
-      select: ['id', 'username', 'role']
+      select : attributesToSelect,
     };
+    let project = await Project.find(query);
 
-    let user = await User.findOne(query);
-
-    return exits.success(user);
+    return project;
 
   }
 
