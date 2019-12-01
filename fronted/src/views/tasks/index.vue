@@ -2,11 +2,16 @@
 <div>
   <el-table
     :data="tableData"
+    row-key="id"
+    @row-click="rowClick"
     stripe
     style="width: 100%">
     <el-table-column
       label="编号"
       width="180">
+      <template  slot-scope="props">
+          {{props.$index+1}}
+      </template>
     </el-table-column>
     <el-table-column
       prop="name"
@@ -14,21 +19,27 @@
       width="180">
     </el-table-column>
     <el-table-column
-      prop="address"
+      prop="leader"
       label="负责老师">
     </el-table-column>
      <el-table-column
       label="状态"
       width="180">
+      <template>
+          状态
+      </template>
     </el-table-column>
     <el-table-column
-      prop="name"
+      prop="deadline"
       label="截止时间"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="address"
       label="操作">
+        <template >
+          <i class="el-icon-edit clickable" ></i>
+          <i class="el-icon-delete clickable" style="color:red" ></i>
+        </template>
     </el-table-column>
   </el-table>
 </div>
@@ -58,10 +69,17 @@
         }]
       }
     },
-     mounted() {
-         this.$api.get("/api/v1/admin/project",{},res=>{
-             console.log(res);
+    mounted() {
+         this.$api.get("/api/v1/project",{},res=>{
+             this.tableData=res.data;
+             console.log(this.tableData);
          })
     },
+     methods: {
+         rowClick(e){
+             console.log(e);
+         }
+     }
+
   }
 </script>
