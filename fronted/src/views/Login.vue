@@ -88,12 +88,24 @@ export default {
         this.$message({ showClose: true , message: '请先完善信息！' , type: 'warning' });
         return
       }
+    
       this.$api.post("/api/v1/auth/signin",{
         username: this.loginForm.username,
         password: this.loginForm.password
         },res=>{
-        this.$store.dispatch("getNewToken", res.data.token);
-        this.$router.push({ path: '/index' });
+        //todo
+        //账号密码登录错误怎么判断的？直接就报错了可还行....
+          if(res.data.token!=null){
+            this.$store.dispatch("getNewToken", res.data.token);//保存用户的token
+            this.$api.get("/api/v1/auth/me",{},res=>{
+              this.$store.dispatch("setNewRole", res.data.role);
+            })
+          }
+          else{
+            this.$message({ showClose: true , message: '请确认您的帐号与密码' , type: 'error' });
+          }
+         // this.$store.dispatch("getNewToken", res.data.token);
+        //this.$router.push({ path: '/index' });
       }) 
     }
   }
