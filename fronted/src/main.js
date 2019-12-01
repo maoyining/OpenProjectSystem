@@ -9,6 +9,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 import Api from './api/index';
 import store from './store';
+import myMenu from './layout/index';
+Vue.component("myMenu",myMenu);
 Vue.use(ElementUI, {size:'small',zIndex:3000});
 Vue.config.productionTip = false
 Vue.prototype.$api=Api;
