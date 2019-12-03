@@ -29,7 +29,9 @@ module.exports = {
         select : attributesToSelect,
       };
       let v = await Project.findOne(query);
+      let a = await User.findOne({id:p[i].user});
       v.state=p[i].status;
+      v.applyer=a.username;
       project.push(v);
     }
     return project;
