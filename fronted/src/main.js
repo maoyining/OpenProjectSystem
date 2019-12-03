@@ -22,3 +22,18 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+Vue.filter('projectStatus', function(value) {
+  console.log(value)
+  if (value) {
+    if(value==0|value==6)
+      return '已发布';
+    else if(value==2)
+      return '招募中';
+    else if(value==3)
+      return '进行中';
+    else if(value==4)
+      return '已结束';
+  } else {
+    return '未知状态';
+  }
+});
