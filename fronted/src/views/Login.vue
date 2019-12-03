@@ -99,6 +99,8 @@ export default {
             this.$store.dispatch("getNewToken", res.data.token);//保存用户的token
             this.$api.get("/api/v1/auth/me",{},res=>{
               this.$store.dispatch("setNewRole", res.data.role);
+              this.$store.dispatch("getNewUsername", res.data.username);
+              this.$router.push({ path: "/" });
             })
           }
           else{

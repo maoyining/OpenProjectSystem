@@ -1,37 +1,54 @@
 <template>
-  <div>
-    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-      <el-radio-button :label="false">展开</el-radio-button>
-      <el-radio-button :label="true">收起</el-radio-button>
-    </el-radio-group>
-    <el-menu
-      default-active="1-4-1"
-      class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
-      :collapse="isCollapse"
-    >
-       <el-submenu
-          class="header-menu-submenu"
-          v-for="link in links"
-          v-bind:key="link.key"
-          :index="link.url"
-        >
-          <template slot="title">{{link.name}}</template>
-          <el-menu-item
-            v-for="sub in link.submenu"
-            v-bind:key="sub.key"
-            :index="sub.url"
-          >{{sub.name}}</el-menu-item>
-        </el-submenu>
-   
+  <div class="menu">
+    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
+      <el-submenu
+        class="header-menu-submenu"
+        v-for="link in links"
+        v-bind:key="link.key"
+        :index="link.url"
+      >
+      <template slot="title" ><i class="el-icon-folder"></i>{{link.name}}</template>
+        <el-menu-item
+          v-for="sub in link.submenu"
+          v-bind:key="sub.key"
+          :index="sub.url"
+          @click="MunuClick(sub.url)"
+         
+        >{{sub.name}}</el-menu-item>
+      </el-submenu>
     </el-menu>
   </div>
 </template>
 <style>
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
+ 
   min-height: 400px;
+}
+.el-submenu__title{
+  font-size: 20px;
+  color:#050505;
+}
+.el-submenu .el-menu-item{
+  color: #050505;
+
+  font-size:20px;
+}
+.header-menu-submenu{
+  margin-top:14px;
+}
+.el-menu{
+  margin-left:5px;
+  margin-top:50px;
+}
+.el-submenu [class^=el-icon-] {
+  font-size: 24px;
+  
+}
+.el-submenu__title i{
+  color:#707070;
+}
+.el-menu-item.is-active{
+  background:#F55D54
 }
 </style>
 <script>
@@ -39,45 +56,73 @@ export default {
   data() {
     return {
       isCollapse: false,
+      role: "",
       links: [
         {
           name: "所有任务",
-          url: "/index",
+          url: "/project",
           key: 1,
-           submenu: [
-            { name: "查看所有项目", url: "/original", key: 21 },
-            { name: "创建项目", url: "/cover", key: 22 }
+          role: 2,
+          submenu: [
+            { name: "查看所有项目", url: "/", key: 21, role: 2 },
+            { name: "创建项目", url: "/project/new", key: 22, role: 0 }
           ]
         },
+        {
+          name: "项目审核",
+          url: "/project",
+          key: 4,
+          role: 0,
+          submenu: [
+            { name: "审核申请消息", url: "/admin/message", key: 41, role: 2 },
+            {
+              name: "审核项目提交材料",
+              url: "/admin/project",
+              key: 42,
+              role: 2
+            }
+          ]
+        },
+
         {
           name: "我的消息",
           url: "/message",
           key: 2,
+          role: 2,
           submenu: [
-            { name: "申请项目", url: "/original", key: 21 },
-            { name: "邀请消息", url: "/cover", key: 22 }
+            { name: "申请项目", url: "/original", key: 21, role: 2 },
+            { name: "邀请消息", url: "/cover", key: 22, rol2: 2 }
           ]
         },
         {
           name: "历史纪录",
           url: "/history",
           key: 3,
+          role: 2,
           submenu: [
-            { name: "任务提交", url: "/acg", key: 31 },
-            { name: "项目记录", url: "/reality", key: 32 }
+            { name: "任务提交", url: "/acg", key: 31, role: 2 },
+            { name: "项目记录", url: "/reality", key: 32, role: 2 }
           ]
-        },
-       
+        }
       ]
     };
   },
+  mounted() {
+    this.role = this.$store.state.role;
+  },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
+    MunuClick(e) {
+      this.$router.push({ path: e });
     },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
+    //todo
+    //文件夹的打开关闭
+    handleOpen(e){
+      //console.log(e);
+    },
+    handleClose(e){
+      //console.log(e);
     }
   }
+
 };
 </script>
