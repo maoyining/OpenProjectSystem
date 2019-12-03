@@ -19,12 +19,14 @@ module.exports.routes = {
   'POST /api/v1/admin/project':'admin.add-project',
   'PUT /api/v1/admin/agree':'admin.agree-project',
   'PUT /api/v1/admin/disprove':'admin.disprove-project',
+  'GET /api/v1/admin/message':'admin.get-message',
 
   //STUDENT
   'POST /api/v1/student/project':'student.apply-project', //DONE
   'PUT /api/v1/student/project/agree':'student.agree-project',
   'PUT /api/v1/student/project/disagree':'student.disagree-project',
   'GET /api/v1/student/project':'student.my-project',
+  'GET /api/v1/student/message':'student.get-message',
 
   //TEACHER
   'POST /api/v1/teacher/project':'teacher.apply-project',
@@ -32,7 +34,7 @@ module.exports.routes = {
   'PUT /api/v1/teacher/student/disagree':'teacher.disagree-student',//DONE
   'POST /api/v1/teacher/student/invite':'teacher.invite-student',
   'GET /api/v1/teacher/project':'teacher.my-project',
-
+  'GET /api/v1/teacher/message':'teacher.get-message',
   //PROJECT
   'GET /api/v1/project/:id':'project.find-one',
   'GET /api/v1/project':'project.find-list',
