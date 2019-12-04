@@ -97,8 +97,7 @@ export default {
   },
   mounted() {
     this.messages();
-    this.uid=this.$store.state.id;
-   
+    
   },
   methods: {
     messages(){
@@ -109,7 +108,7 @@ export default {
     },
     agreeProject(e) {
       this.pid=e.id;
-    
+      this.uid=e.applyerID;
       this.$api.put("/api/v1/admin/agree",{
         uid:this.uid,
         pid:this.pid

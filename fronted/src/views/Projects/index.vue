@@ -116,6 +116,7 @@ export default {
       deleteDialog: false,
       id: "",
       searchData:'',
+      role:'',
     };
   },
   components: {
@@ -136,10 +137,26 @@ export default {
     }
   },
   mounted() {
-    this.$api.get("/api/v1/project", {}, res => {
-      this.datasize = res.data.length;
-      this.tableData = res.data;
+    this.role=this.$store.state.role;
+    console.log("role"+this.role);
+    if(this.role==1){
+        this.$api.get("/api/v1/project", {}, res => {
+            this.datasize = res.data.length;
+            this.tableData = res.data;
     });
+    }//角色老师
+    else if(this.role==3){
+      this.$api.get("/api/v1/project?status=0", {}, res => {
+            this.datasize = res.data.length;
+            this.tableData = res.data;
+    });
+    }else if(this.role==2){
+      this.$api.get("/api/v1/project?status=1", {}, res => {
+            this.datasize = res.data.length;
+            this.tableData = res.data;
+    });
+    }
+    
   },
   methods: {
     editProject(e) {
