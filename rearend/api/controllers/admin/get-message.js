@@ -32,6 +32,7 @@ module.exports = {
       let a = await User.findOne({id:p[i].user});
       v.state=p[i].status;
       v.applyer=a.username;
+      v.applyerID=a.id;
       project.push(v);
     }
     return project;
