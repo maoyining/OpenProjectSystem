@@ -28,7 +28,12 @@ module.exports = {
       },
     };
     let project = await Project.find(query);
-
+    for(let i=0; i<project.length; i++){
+      if(project[i].leader!==null){
+        let a =await User.findOne({id:project[i].leader});
+        project[i].leaderName=a.username;
+      }
+    }
     return project;
 
   }
