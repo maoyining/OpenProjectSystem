@@ -8,6 +8,7 @@
       <el-table-column prop="leader" label="申请人"></el-table-column>
 
       <el-table-column prop="deadline" label="截止时间" width="180"></el-table-column>
+       <el-table-column prop="updatetime" label="更新时间" width="180"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="props">
           <span @click="editProject(props.row)" v-if="props.row.status==0">同意</span>
@@ -31,7 +32,7 @@
 export default {
   data() {
     return {
-      tableData: [{}],
+      messageData: [{}],
       datasize: 0,
       editDialog: false,
       editData: [],
@@ -56,7 +57,7 @@ export default {
   mounted() {
     this.$api.get("/api/v1/admin/message", {}, res => {
       this.datasize = res.data.length;
-      this.tableData = res.data;
+      this.messageData = res.data;
     });
   },
   methods: {

@@ -7,7 +7,9 @@ module.exports = {
   description: '',
 
   inputs: {
-    status:'number'
+    status:{
+      type:'number'
+    }
   },
 
 

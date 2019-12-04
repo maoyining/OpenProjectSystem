@@ -124,9 +124,9 @@ export default {
       return function(updateStatus) {
         return {
           published: updateStatus == "0",
-          start: updateStatus == "2",
-          running: updateStatus == "2",
-          over: updateStatus == "3"//项目完成
+          start: updateStatus == "1",//导师成功接走
+          running: updateStatus == "2",//招募完成
+         // over: updateStatus == "2"//项目完成
         };
       };
     }
