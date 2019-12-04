@@ -9,6 +9,9 @@ module.exports = {
   inputs: {
     status:{
       type:'number'
+    },
+    s:{
+      type:'string'
     }
   },
 
@@ -21,10 +24,17 @@ module.exports = {
   fn: async function (inputs) {
 
     let attributesToSelect = sails.helpers.getAttributesToSelect(this.req);
+    if(inputs.s===undefined){
+      inputs.s='';
+    }
     let query = {
       select : attributesToSelect,
       where : {
-        status:inputs.status
+        status:inputs.status,
+        or: [
+          { name: { 'contains': inputs.s } },
+          { description: { 'contains': inputs.s } },
+        ]
       },
     };
     let project = await Project.find(query);
