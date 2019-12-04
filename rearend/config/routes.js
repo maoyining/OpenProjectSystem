@@ -23,15 +23,15 @@ module.exports.routes = {
 
   //STUDENT
   'POST /api/v1/student/project':'student.apply-project', //DONE
-  'PUT /api/v1/student/project/agree':'student.agree-project',
-  'PUT /api/v1/student/project/disagree':'student.disagree-project',
+  'PUT /api/v1/student/agree':'student.agree-project',
+  'PUT /api/v1/student/disagree':'student.disagree-project',
   'GET /api/v1/student/project':'student.my-project',
   'GET /api/v1/student/message':'student.get-message',
 
   //TEACHER
   'POST /api/v1/teacher/project':'teacher.apply-project',
-  'PUT /api/v1/teacher/student/agree':'teacher.agree-student',//DONE
-  'PUT /api/v1/teacher/student/disagree':'teacher.disagree-student',//DONE
+  'PUT /api/v1/teacher/agree':'teacher.agree-student',//DONE
+  'PUT /api/v1/teacher/disagree':'teacher.disagree-student',//DONE
   'POST /api/v1/teacher/student/invite':'teacher.invite-student',
   'GET /api/v1/teacher/project':'teacher.my-project',
   'GET /api/v1/teacher/message':'teacher.get-message',
