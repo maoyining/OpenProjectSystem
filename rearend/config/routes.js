@@ -18,7 +18,7 @@ module.exports.routes = {
   //ADMIN DONE
   'POST /api/v1/admin/project':'admin.add-project',
   'PUT /api/v1/admin/agree':'admin.agree-project',
-  'PUT /api/v1/admin/disprove':'admin.disprove-project',
+  'PUT /api/v1/admin/disagree':'admin.disprove-project',
   'GET /api/v1/admin/message':'admin.get-message',
 
   //STUDENT
