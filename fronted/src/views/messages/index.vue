@@ -74,7 +74,9 @@ export default {
       deleteDialog: false,
       pid: "",
       uid:'',
-      searchData: ""
+      searchData: "",
+      role:'',
+      roles:'',
     };
   },
   components: {
@@ -95,20 +97,29 @@ export default {
     }
   },
   mounted() {
+    this.role=this.$store.state.role;
+    if(this.role==1)
+      this.roles="admin";
+    else if(this.role==2)
+      this.roles="student";
+       if(this.role==3)
+      this.roles="teacher";
     this.messages();
     
   },
   methods: {
     messages(){
-    this.$api.get("/api/v1/admin/message", {}, res => {
+       this.$api.get("/api/v1/"+this.roles+"/message", {}, res => {
       this.datasize = res.data.length;
       this.tableData = res.data;
     });
     },
+
     agreeProject(e) {
       this.pid=e.id;
       this.uid=e.applyerID;
-      this.$api.put("/api/v1/admin/agree",{
+
+      this.$api.put("/api/v1/"+this.roles+"/agree",{
         uid:this.uid,
         pid:this.pid
       },res=>{
@@ -125,7 +136,7 @@ export default {
     disagreeProject(e) {
       this.pid=e.id;
       this.uid=e.applyerID;
-      this.$api.put("/api/v1/admin/disprove",{
+      this.$api.put("/api/v1/"+this.roles+"/disagree",{
         uid:this.uid,
         pid:this.pid
       },res=>{
