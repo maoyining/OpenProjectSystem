@@ -5,7 +5,7 @@
       <el-row :gutter="20" class="create-item" style="margin-top:150px;">
         <el-col :span="6" class="table-item-name">项目名称:</el-col>
         <el-col :span="12">
-          <el-input v-model="name" ></el-input>
+          <el-input v-model="name" style="width:400px"></el-input>
         </el-col>
       </el-row>
       <el-row :gutter="20" class="create-item">
@@ -18,6 +18,12 @@
             type="textarea"
             placeholder="请输入内容"
           ></el-input>
+        </el-col>
+      </el-row>
+       <el-row :gutter="20" class="create-item" v-if="role==2">
+        <el-col :span="6" class="table-item-name">负责老师:</el-col>
+        <el-col :span="12">
+          <el-input v-model="leaderName" style="width:400px"></el-input>
         </el-col>
       </el-row>
       <el-row :gutter="20" class="create-item">
@@ -49,7 +55,7 @@
           <!-- 学生申请 -->
         </el-col>
         <el-col :span="12">
-          <el-button class="cancel-button">取消</el-button>
+          <el-button class="cancel-button" @click="handleBack">取消</el-button>
         </el-col>
       </el-row>
     </div>
@@ -93,6 +99,7 @@ export default {
       description: "",
       filed: [],
       deadline: "",
+      leaderName:'',
       title: "所有项目",
       subtitle: "查看项目详情",
       id: "",
@@ -159,6 +166,9 @@ export default {
             });
           } 
         })
+    },
+    handleBack(){
+      this.$router.go(-1); 
     }
   }
 };

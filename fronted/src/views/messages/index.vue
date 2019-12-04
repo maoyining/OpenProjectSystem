@@ -40,10 +40,9 @@
       </el-table-column>
       <el-table-column label="操作" width="230">
         <template slot-scope="props">
-          <span @click.stop="agreeProject(props.row)" v-if="props.row.state==1">同意</span>
-          <span style="color:red" @click.stop="disagreeProject(props.row.id)" v-if="props.row.state==1">拒绝</span>
-          <span  v-if="props.row.state==2">已同意</span>
-          <span  v-if="props.row.state==6">已拒绝</span>
+          <span @click.stop="agreeProject(props.row)" >同意</span>
+          <span style="color:red" @click.stop="disagreeProject(props.row)" >拒绝</span>
+          
         </template>
       </el-table-column>
     </el-table>
@@ -122,7 +121,23 @@ export default {
           }
           this.messages();
       })
-  
+    },
+    disagreeProject(e) {
+      this.pid=e.id;
+      this.uid=e.applyerID;
+      this.$api.put("/api/v1/admin/disprove",{
+        uid:this.uid,
+        pid:this.pid
+      },res=>{
+         if (res.data == "OK") {
+            this.$message({
+              showClose: true,
+              message: "已拒绝该申请",
+              type: "success"
+            });
+          }
+          this.messages();
+      })
     },
     deleteProject(e) {
       this.deleteDialog = true;

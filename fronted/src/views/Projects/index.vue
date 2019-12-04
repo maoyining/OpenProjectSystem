@@ -20,7 +20,7 @@
         <template slot-scope="props">{{props.$index+1}}</template>
       </el-table-column>
       <el-table-column prop="name" label="名称" width="560"></el-table-column>
-      <el-table-column prop="leader" label="负责老师" width="220"></el-table-column>
+      <el-table-column prop="leaderName" label="负责老师" width="220"></el-table-column>
       <el-table-column label="状态" width="180">
         <template slot-scope="props">
           <el-button
