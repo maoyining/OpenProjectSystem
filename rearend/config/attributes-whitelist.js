@@ -29,7 +29,10 @@ module.exports.attributesWhitelist = {
   // },
   'admin/add-project':['name','description','teamSize','field','deadline'],
   'teacher/my-project':{
-    select:['name','status','teamSize','currentSize']
+    select:['name','status','teamSize','currentSize','leader']
+  },
+  'student/my-project':{
+    select:['name','status','teamSize','currentSize','leader']
   },
   'project/find-list':{
     select:['name','status','teamSize','currentSize','deadline','leader']
