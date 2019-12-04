@@ -6,6 +6,7 @@ const state={
     token: localStorage.getItem('user-token'),
     role:localStorage.getItem('user-role'),
     username:localStorage.getItem('user-username'),
+    id:localStorage.getItem('user-id'),
 };
 const getters={
     getToken(){
@@ -26,6 +27,12 @@ const getters={
         }
         return state.username
     },
+    getId(){
+        if (!state.id) {
+            state.id = localStorage.getItem('user-id');
+        }
+        return state.id
+    },
    
 }
 const mutations={
@@ -41,6 +48,10 @@ const mutations={
         localStorage.setItem('user-username', string)
         state.username=string;
     },
+    changeId(state,num){
+        localStorage.setItem('user-id', num)
+        state.id=num;
+    },
 
 }
 const actions={
@@ -52,6 +63,9 @@ const actions={
     },
     getNewUsername(context,string){
         context.commit('changeUsername',string)
+    },
+    getNewId(context,num){
+        context.commit('changeId',num)
     },
 }
 const store = new Vuex.Store({

@@ -4,9 +4,7 @@
       <el-row :gutter="24">
         <el-col :span="4" class="table-title" :offset="1">所有项目</el-col>
         <el-col :span="4" :offset="12">
-        
             <el-input placeholder="请输入搜索条件" class="search-input" clearable v-model="searchData" prefix-icon="el-icon-search"> </el-input>
-        
         </el-col>
       </el-row>
     </div>
@@ -31,7 +29,13 @@
           >{{props.row.status|projectStatus}}</el-button>
         </template>
       </el-table-column>
-      <el-table-column prop="deadline" label="截止时间" width="180"></el-table-column>
+      <el-table-column  label="截止时间" width="180">
+          <template slot-scope="props">
+          <span
+           
+          >{{props.row.deadline|formatDate}}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" width="180">
         <template slot-scope="props">
           <i
@@ -123,7 +127,7 @@ export default {
       //计算属性无法直接进行传参，使用匿名函数
       return function(updateStatus) {
         return {
-          published: updateStatus == "0",
+          published: updateStatus == "0",//成功发布
           start: updateStatus == "1",//导师成功接走
           running: updateStatus == "2",//招募完成
          // over: updateStatus == "2"//项目完成

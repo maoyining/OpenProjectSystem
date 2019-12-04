@@ -24,6 +24,9 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+function pad(n) {
+  return n<10 ? '0'+n : n;
+}
 Vue.filter('projectStatus', function(value) {
   if (value!=null) {
     if(value==0)
