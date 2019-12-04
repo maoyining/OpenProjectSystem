@@ -100,6 +100,7 @@ export default {
             this.$api.get("/api/v1/auth/me",{},res=>{
               this.$store.dispatch("setNewRole", res.data.role);
               this.$store.dispatch("getNewUsername", res.data.username);
+              this.$store.dispatch("getNewId", res.data.id);
               this.$router.push({ path: "/" });
             })
           }

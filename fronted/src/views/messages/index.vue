@@ -1,44 +1,85 @@
 <template>
-  <div v-if="datasize>0">
-    <el-table :data="messageData" row-key="id" stripe style="width: 100%">
-      <el-table-column label="编号" width="180">
+  <div v-if="datasize>0" class="messageClass">
+    <div class="table-search">
+      <el-row :gutter="24">
+        <el-col :span="4" class="table-title" :offset="1">审核项目申请</el-col>
+        <el-col :span="4" :offset="12">
+          <el-input
+            placeholder="请输入搜索条件"
+            class="search-input"
+            clearable
+            v-model="searchData"
+            prefix-icon="el-icon-search"
+          ></el-input>
+        </el-col>
+      </el-row>
+    </div>
+    <el-table
+      :data="tableData"
+      row-key="index"
+      stripe
+      style="width: 80%"
+      @row-click="rowClick"
+      class="project-table"
+    >
+      <el-table-column label="编号" width="100">
         <template slot-scope="props">{{props.$index+1}}</template>
       </el-table-column>
-      <el-table-column prop="name" label="项目名称" width="180"></el-table-column>
-      <el-table-column prop="leader" label="申请人"></el-table-column>
+      <el-table-column prop="name" label="名称" width="500"></el-table-column>
+      <el-table-column prop="applyer" label="申请人" width="220"></el-table-column>
 
-      <el-table-column prop="deadline" label="截止时间" width="180"></el-table-column>
-       <el-table-column prop="updatetime" label="更新时间" width="180"></el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="截止时间" width="250">
         <template slot-scope="props">
-          <span @click="editProject(props.row)" v-if="props.row.status==0">同意</span>
-          <span style="color:red" @click="deleteProject(props.row.id)">拒绝</span>
-          <el-dialog title="删除项目" :visible.sync="deleteDialog">
-            <span slot="footer" class="dialog-footer">
-              <el-button @click.stop="cancel">取消</el-button>
-              <el-button type="primary" @click.stop="deleteConfirm(id)">确定</el-button>
-            </span>
-          </el-dialog>
+          <span>{{props.row.deadline|formatDate}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="更新时间" width="250">
+        <template slot-scope="props">
+          <span>{{props.row.updatedAt|formatDate}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="操作" width="230">
+        <template slot-scope="props">
+          <span @click.stop="agreeProject(props.row)" v-if="props.row.state==1">同意</span>
+          <span style="color:red" @click.stop="disagreeProject(props.row.id)" v-if="props.row.state==1">拒绝</span>
+          <span  v-if="props.row.state==2">已同意</span>
+          <span  v-if="props.row.state==6">已拒绝</span>
         </template>
       </el-table-column>
     </el-table>
     <div class="block">
-      <el-pagination layout="prev, pager, next" :total="datasize"></el-pagination>
+      <el-row :gutter="20">
+        <el-col :span="6">
+          <el-pagination layout="prev, pager, next" :total="datasize"></el-pagination>
+        </el-col>
+        <el-col :span="8">
+          <el-input placeholder="请输入页码"></el-input>
+        </el-col>
+        <el-col :span="6">
+          <el-button>跳至</el-button>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
 
 <script>
+import navCard from "@/components/card.vue";
 export default {
   data() {
     return {
-      messageData: [{}],
+      tableData: [{}],
       datasize: 0,
       editDialog: false,
       editData: [],
       deleteDialog: false,
-      id: ""
+      pid: "",
+      uid:'',
+      searchData: ""
     };
+  },
+  components: {
+    navCard
   },
   computed: {
     // 计算属性的 getter
@@ -46,26 +87,42 @@ export default {
       //计算属性无法直接进行传参，使用匿名函数
       return function(updateStatus) {
         return {
-          published: updateStatus == "0",
-          start: updateStatus == "1",
-          running: updateStatus == "2",
-          over: updateStatus == "3"
+          published: updateStatus == "0", //成功发布
+          start: updateStatus == "1", //导师成功接走
+          running: updateStatus == "2" //招募完成
+          // over: updateStatus == "2"//项目完成
         };
       };
     }
   },
   mounted() {
-    this.$api.get("/api/v1/admin/message", {}, res => {
-      this.datasize = res.data.length;
-      this.messageData = res.data;
-    });
+    this.messages();
+    
   },
   methods: {
-    editProject(e) {
-      console.log(e);
-      this.editData = e;
-      this.id = e.id;
-      this.editDialog = true;
+    messages(){
+    this.$api.get("/api/v1/admin/message", {}, res => {
+      this.datasize = res.data.length;
+      this.tableData = res.data;
+    });
+    },
+    agreeProject(e) {
+      this.pid=e.id;
+      this.uid=e.applyerID;
+      this.$api.put("/api/v1/admin/agree",{
+        uid:this.uid,
+        pid:this.pid
+      },res=>{
+         if (res.data == "OK") {
+            this.$message({
+              showClose: true,
+              message: "已同意该申请",
+              type: "success"
+            });
+          }
+          this.messages();
+      })
+  
     },
     deleteProject(e) {
       this.deleteDialog = true;
@@ -91,18 +148,56 @@ export default {
 </script>
 <style>
 .published {
-  background: #ffffff 100%;
+  background: #ff9966;
 }
 .start {
-  background: red;
+  background: #f55d54;
 }
 .running {
-  background: #ffffff 100%;
+  background: #cc9999;
 }
 .over {
-  background: red;
+  background: #cccccc;
 }
 .block {
   float: right;
+  margin: 100px;
+  margin-left: -200px;
 }
-</style>
+.project-status-button {
+  color: #ffffff;
+}
+.messageClass {
+  background: #ffffff;
+  height: 900px;
+}
+.project-table {
+  margin-left: 36px;
+  margin-top: 30px;
+  font-size: 20px !important;
+  overflow: hidden;
+  cursor: pointer;
+}
+.el-table--small td, .el-table--small th{
+    padding:25px 0;
+}
+.el-table {
+  width: 80%;
+}
+.el-table--scrollable-x .el-table__body-wrapper {
+  overflow-x: hidden !important;
+}
+.table-title {
+  font-size: 30px;
+  margin-top: 20px;
+}
+.search-input {
+  margin-top: 20px;
+  width: 310px;
+  height: 41px;
+  line-height: 20px;
+  border-radius: 5px 5px 5px 5px;
+  font-size: 14px;
+  text-align: center;
+}
+</style> 
