@@ -25,7 +25,6 @@ module.exports = {
     let db = Project.getDatastore().manager;
     var ProjectCollection = db.collection(Project.tableName);
     await ProjectCollection.findOneAndUpdate({_id:new ObjectId(inputs.id)},{$inc:{'currentSize':1}});
-
     await UserProject.update({
       user:this.req.me.id,
       project:inputs.id,
