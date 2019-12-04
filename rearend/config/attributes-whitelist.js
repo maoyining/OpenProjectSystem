@@ -32,7 +32,7 @@ module.exports.attributesWhitelist = {
     select:['name','status','teamSize','currentSize']
   },
   'project/find-list':{
-    select:['name','status','teamSize','currentSize']
+    select:['name','status','teamSize','currentSize','deadline']
   },
   'auth/findlist-user':{
     select:['username','role','academy','gender']
