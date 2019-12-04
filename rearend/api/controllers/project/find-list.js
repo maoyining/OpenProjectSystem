@@ -7,7 +7,7 @@ module.exports = {
   description: '',
 
   inputs: {
-
+    status:'number'
   },
 
 
@@ -16,11 +16,14 @@ module.exports = {
   },
 
 
-  fn: async function () {
+  fn: async function (inputs) {
 
     let attributesToSelect = sails.helpers.getAttributesToSelect(this.req);
     let query = {
       select : attributesToSelect,
+      where : {
+        status:inputs.status
+      },
     };
     let project = await Project.find(query);
 
