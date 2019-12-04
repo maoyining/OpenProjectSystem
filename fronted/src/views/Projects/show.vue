@@ -49,12 +49,16 @@
       <el-row :gutter="20" class="create-item" style="margin-top:60px">
         <el-col :span="6" class="table-item-name">
           <el-button @click="changeProject()" class="create-button" v-if="role==1">修改</el-button>
-          <el-button @click="applyProject()" class="create-button" v-if="role==3">申请</el-button>
+          <div v-if="role==3">
+
+          <el-button @click="applyProject()" class="create-button"  v-if="state==0">申请</el-button>
+          <el-button @click="applyProject()" class="create-button"  disabled v-if="state!=0">邀请同学</el-button>
+          </div>
           <!-- 老师申请 -->
-          <el-button @click="putProject()" class="create-button" v-if="role==2">申请</el-button>
+          <el-button @click="putProject()" class="create-button" v-if="role==2&&state==1">申请</el-button>
           <!-- 学生申请 -->
         </el-col>
-        <el-col :span="12">
+        <el-col :span="12" >
           <el-button class="cancel-button" @click="handleBack">取消</el-button>
         </el-col>
       </el-row>
@@ -114,7 +118,7 @@ export default {
       this.name = res.data.name;
       this.description = res.data.description;
       this.filed = res.data.field;
-      console.log(this.filed);
+      this.leaderName=res.data.leaderName;
       this.state = res.data.status;
       this.leader = res.data.leader;
       this.deadline = res.data.deadline;

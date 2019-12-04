@@ -59,13 +59,23 @@ export default {
       role: "",
       links: [
         {
-          name: "所有任务",
+          name: "所有项目",
           url: "/project",
           key: 1,
           role: 2,
           submenu: [
             { name: "查看所有项目", url: "/", key: 21, role: 2 },
-            { name: "创建项目", url: "/project/new", key: 22, role: 0 }
+            { name: "创建项目", url: "/project/new", key: 22, role: 0 },
+          ]
+        },
+        {
+          name: "我的项目",
+          url: "/myproject",
+          key: 5,
+          role: 2,
+          submenu: [
+            { name: "查看我的项目", url: "/myproject", key: 51, role: 2 },
+            { name: "分配项目", url: "/project/new", key: 52, role: 0 },
           ]
         },
         {

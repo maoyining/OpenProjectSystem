@@ -33,5 +33,10 @@ export default new Router({
       name:'adminMessage',
       component: () => import('@/views/messages/index')//申请列表显示
     },
+    {
+      path:'/myproject',
+      name:'Myproject',
+      component: () => import('@/views/own/index')//我的项目列表显示
+    },
   ]
 })
