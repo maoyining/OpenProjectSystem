@@ -2,13 +2,13 @@
   <el-container>
     <el-header class="headerClass">
       <el-row :gutter="24">
-        <el-col :span="4">
+        <el-col :span="4" style="margin-top:20px;">
           <div>{{username}}</div>
         </el-col>
         <el-col :span="6">
           <div class="project-name">项目管理系统</div>
         </el-col>
-        <el-col :span="6" :offset="12" style="float:right">
+        <el-col :span="6"  style="margin-top:20px;float:right">
           <i class="el-icon-switch-button"></i>
           <span prefix-icon="el-icon-switch-button" @click="handleLayout">退出</span>
         </el-col>

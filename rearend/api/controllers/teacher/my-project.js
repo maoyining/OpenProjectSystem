@@ -35,7 +35,7 @@ module.exports = {
       // console.log(v);
       if(v.leader!==undefined){
         let a = await User.findOne({id:v.leader});
-        v.leaderName=a.username;
+        // v.leaderName=a.username;
       }
 
       v.state=p[i].status;
