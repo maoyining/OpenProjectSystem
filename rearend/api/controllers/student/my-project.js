@@ -30,7 +30,7 @@ module.exports = {
         select : attributesToSelect,
       };
       let v = await Project.findOne(query);
-      if(v.leader!==undefined){
+      if(v.leader!==null){
         let a = await User.findOne({id:v.leader});
         v.leaderName=a.username;
       }
