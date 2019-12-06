@@ -34,7 +34,17 @@ export default new Router({
       component: () => import('@/views/messages/index')//申请列表显示
     },
     {
-      path:'/myproject',
+      path:'/myproject/:id',
+      name:'Myproject',
+      component: () => import('@/views/own/index')//我的项目列表显示
+    },
+    {
+      path:'/myproject/in/:id',
+      name:'Myproject',
+      component: () => import('@/views/own/index')//申请中列表显示
+    },
+    {
+      path:'/myproject/reject/:id',
       name:'Myproject',
       component: () => import('@/views/own/index')//我的项目列表显示
     },
