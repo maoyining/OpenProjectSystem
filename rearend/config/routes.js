@@ -27,6 +27,8 @@ module.exports.routes = {
   'PUT /api/v1/student/disagree':'student.disagree-project',
   'GET /api/v1/student/project':'student.my-project',
   'GET /api/v1/student/message':'student.get-message',
+  'GET /api/v1/student/task':'student.my-task',
+
 
   //TEACHER
   'POST /api/v1/teacher/project':'teacher.apply-project',
@@ -35,6 +37,8 @@ module.exports.routes = {
   'POST /api/v1/teacher/student/invite':'teacher.invite-student',
   'GET /api/v1/teacher/project':'teacher.my-project',
   'GET /api/v1/teacher/message':'teacher.get-message',
+  'POST /api/v1/teacher/task':'teacher.add-task',
+  'GET /api/v1/teacher/task':'teacher.my-task',
   //PROJECT
   'GET /api/v1/project/:id':'project.find-one',
   'GET /api/v1/project':'project.find-list',
