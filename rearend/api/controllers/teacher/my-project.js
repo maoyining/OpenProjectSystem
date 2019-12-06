@@ -34,7 +34,7 @@ module.exports = {
       let v = await Project.findOne(query);
       if(v.leader!==null){
         let a = await User.findOne({id:v.leader});
-        // v.leaderName=a.username;
+        v.leaderName=a.username;
       }
 
       v.state=p[i].status;
