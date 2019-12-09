@@ -33,7 +33,9 @@ module.exports = {
       v.applyer=a.username;
       v.applyerID=a.id;
       v.state=p[i].status;
-      project.push(v);
+      if(v.leader===this.req.me.id){
+        project.push(v);
+      }
     }
     return project;
 
