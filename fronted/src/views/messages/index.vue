@@ -105,7 +105,6 @@ export default {
        if(this.role==3)
       this.roles="teacher";
     this.messages();
-    
   },
   methods: {
     messages(){
@@ -114,11 +113,9 @@ export default {
       this.tableData = res.data;
     });
     },
-
     agreeProject(e) {
       this.pid=e.id;
       this.uid=e.applyerID;
-
       this.$api.put("/api/v1/"+this.roles+"/agree",{
         uid:this.uid,
         pid:this.pid
