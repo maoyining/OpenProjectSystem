@@ -8,7 +8,9 @@ module.exports = {
 
 
   inputs: {
-
+    role:{
+      type:'number'
+    }
   },
 
 
@@ -17,10 +19,13 @@ module.exports = {
   },
 
 
-  fn: async function () {
+  fn: async function (inputs) {
 
     let attributesToSelect = sails.helpers.getAttributesToSelect(this.req);
     let query = {
+      where:{
+        role:inputs.role
+      },
       select : attributesToSelect,
     };
     let user = await User.find(query);
