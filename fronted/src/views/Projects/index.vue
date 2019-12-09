@@ -138,7 +138,6 @@ export default {
   },
   mounted() {
     this.role=this.$store.state.role;
-    console.log("role"+this.role);
     if(this.role==1){
         this.$api.get("/api/v1/project", {}, res => {
             this.datasize = res.data.length;

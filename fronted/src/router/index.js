@@ -24,12 +24,17 @@ export default new Router({
       component: NewProject//新建项目
     },
     {
+      path: '/project/task',
+      name: 'task',
+      component: NewProject//显示任务
+    },
+    {
       path:'/project/:id',
       name:'ProjectDetail',
       component: () => import('@/views/Projects/show')//项目详情显示
     },
     {
-      path:'/admin/message',
+      path:'/message',
       name:'adminMessage',
       component: () => import('@/views/messages/index')//申请列表显示
     },

@@ -12,6 +12,7 @@
             prefix-icon="el-icon-search"
           ></el-input>
         </el-col>
+        <!-- 老师 -->
         <el-col :span="4" v-if="role==3">
           <el-select v-model="itemStatus" placeholder="请选择" class="table-title">
             <el-option
@@ -22,6 +23,7 @@
             ></el-option>
           </el-select>
         </el-col>
+        <!-- 学生 -->
          <el-col :span="4" v-if="role==2">
           <el-select v-model="itemStatus" placeholder="请选择" class="table-title">
             <el-option
@@ -108,7 +110,11 @@ export default {
         {
           label: "被拒绝",
           value: 7
-        }
+        },
+        {
+          label: "邀请中",
+          value: 4
+        },
       ],
       optiont: [
         {
@@ -141,7 +147,8 @@ export default {
         return {
           published: (updateStatus == "3") | (updateStatus == "1"), //申请中
           start: (updateStatus == "5") | (updateStatus == "2"), //申请完成
-          running: (updateStatus == "7") | (updateStatus == "6") //被拒绝
+          running: (updateStatus == "7") | (updateStatus == "6"), //被拒绝
+          over:(updateStatus=="4")//邀请中
         };
       };
     },
@@ -167,7 +174,7 @@ export default {
   methods: {
     handleGetProject() {
       //获取所有项目
-      this.$api.get("/api/v1/teacher/project?state=", {}, res => {
+      this.$api.get("/api/v1/"+this.roles+"/project?state=", {}, res => {
         this.datasize = res.data.length;
         this.tableData = res.data;
       });

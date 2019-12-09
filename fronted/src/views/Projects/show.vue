@@ -26,6 +26,18 @@
           <el-input v-model="leaderName" style="width:400px"></el-input>
         </el-col>
       </el-row>
+      <el-row :gutter="20" class="create-item" v-if="memberNum>0&&role!=1">
+        <el-col :span="6" class="table-item-name">项目成员:</el-col>
+        <el-col :span="12">
+          <el-tag
+            :key="tag.username"
+            v-for="tag in member"
+            closable
+            :disable-transitions="false"
+            @close="handleClose(tag)"
+          >{{tag.username}}</el-tag>
+        </el-col>
+      </el-row>
       <el-row :gutter="20" class="create-item">
         <el-col :span="6" class="table-item-name">技术领域:</el-col>
         <el-col :span="12">
@@ -48,14 +60,16 @@
       </el-row>
       <el-row :gutter="20" class="create-item" style="margin-top:60px">
         <el-col :span="6" class="table-item-name">
+           <!-- 管理员修改 -->
           <el-button @click="changeProject()" class="create-button" v-if="role==1">修改</el-button>
+            <!-- 老师申请&邀请学生 -->
           <div v-if="role==3">
             <el-button @click="applyProject()" class="create-button" v-if="state==0">申请</el-button>
             <el-button @click="invite()" class="create-button" v-if="state!=0">邀请同学</el-button>
           </div>
-          <!-- 老师申请 -->
-          <el-button @click="applyProject()" class="create-button" v-if="role==2&&state==1">申请</el-button>
-          <!-- 学生申请 -->
+         <!-- 学生主动申请项目 -->
+          <!-- <el-button @click="applyProject()" class="create-button" v-if="role==2&&state==1">申请</el-button> -->
+          <el-button @click="applyProject()" class="create-button" v-if="role==2">同意</el-button>
         </el-col>
         <el-col :span="12">
           <el-button class="cancel-button" @click="handleBack">取消</el-button>
@@ -63,17 +77,8 @@
       </el-row>
     </div>
     <el-dialog title="邀请同学" :visible.sync="inviteDialog">
-      <el-select
-        v-model="uid"
-        filterable    
-        placeholder="请输入关键词"
-      >
-        <el-option
-          v-for="item in users"
-          :key="item.id"
-          :label="item.username"
-          :value="item.id"
-        ></el-option>
+      <el-select v-model="uid" filterable placeholder="请输入关键词">
+        <el-option v-for="item in users" :key="item.id" :label="item.username" :value="item.id"></el-option>
       </el-select>
       <span slot="footer" class="dialog-footer">
         <el-button @click.stop="cancel">取消</el-button>
@@ -120,6 +125,8 @@ export default {
       filed: [],
       deadline: "",
       leaderName: "",
+      dynamicTags: ['标签一', '标签二', '标签三'],
+      member:[{}],
       title: "所有项目",
       subtitle: "查看项目详情",
       id: "",
@@ -128,19 +135,17 @@ export default {
       inviteDialog: false,
       users: [{}],
       uid: "",
-      loading:false,
+      loading: false,
+      memberNum:0
     };
   },
   mounted() {
     this.id = this.$route.params.id;
     this.role = this.$store.state.role;
-     this.role=this.$store.state.role;
-    if(this.role==1)
-      this.roles="admin";
-    else if(this.role==2)
-      this.roles="student";
-       if(this.role==3)
-      this.roles="teacher";
+    this.role = this.$store.state.role;
+    if (this.role == 1) this.roles = "admin";
+    else if (this.role == 2) this.roles = "student";
+    if (this.role == 3) this.roles = "teacher";
     this.$api.get("/api/v1/project/" + this.id, {}, res => {
       this.name = res.data.name;
       this.description = res.data.description;
@@ -149,8 +154,10 @@ export default {
       this.state = res.data.status;
       this.leader = res.data.leader;
       this.deadline = res.data.deadline;
+      this.member=res.data.member;
+      this.memberNum=res.data.member.length;
     });
-
+    console.log(this.member);
   },
   methods: {
     //管理员修改
@@ -177,7 +184,7 @@ export default {
     //学生和导师申请
     applyProject() {
       this.$api.post(
-        "/api/v1/"+this.roles+"/project",
+        "/api/v1/" + this.roles + "/project",
         {
           id: this.id
         },
@@ -199,24 +206,38 @@ export default {
     //邀请学生，打开对话框
     invite() {
       this.$api.get("/api/v1/user", {}, res => {
-        this.users=res.data;
+        this.users = res.data;
       });
       this.inviteDialog = true;
     },
     //邀请学生
     inviteStudent() {
-      this.$api.post("/api/v1/teacher/student/invite",{
-        pid:this.id,
-        uid:this.uid
-      },res=>{
-        console.log(res);
-        if(res.data=="OK"){
-            this.$message({ showClose: true , message: '邀请消息已发送,等待回复', type: 'success' });
+      this.$api.post(
+        "/api/v1/teacher/student/invite",
+        {
+          pid: this.id,
+          uid: this.uid
+        },
+        res => {
+          console.log(res);
+          if (res.data == "OK") {
+            this.$message({
+              showClose: true,
+              message: "邀请消息已发送,等待回复",
+              type: "success"
+            });
+          }
         }
-      })
-      this.inviteDialog=false;
+      );
+      this.inviteDialog = false;
     },
-   
+    handleClose(tag) {
+        this.member.splice(this.member.indexOf(tag), 1);
+        //console.log(tag);
+    },
+    cancel(){
+      this.inviteDialog=false
+    }
   }
 };
 </script>
