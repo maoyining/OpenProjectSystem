@@ -42,7 +42,8 @@ module.exports.attributesWhitelist = {
   },
   'auth/findone-user':{
     select:['username','role','academy','field','description','phone','gender']
-  }
+  },
+  'teacher/add-task':['title','content','toStudent','deadline','project']
 
   // 'admin/add-user':['username','password','role','stats','avatar','no','description','country','city','gender','status','fbuid','twuid','inuid'],
 
