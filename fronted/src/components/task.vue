@@ -6,7 +6,26 @@
           <el-col :span="6" :offset="1" class="projectName">{{name}}</el-col>
           <el-col :span="6" :offset="10" class="project-status">{{status|projectStatus}}</el-col>
         </template>
-       
+        <div class="projects">
+        <div class="projectDetail">
+          <el-row :gutter="20" class="create-item">
+            <el-col :span="6" class="table-item-name">任务介绍:</el-col>
+            <el-col :span="12">{{task.content}}</el-col>
+          </el-row>
+           <el-row :gutter="20" class="create-item">
+            <el-col :span="6" class="table-item-name">所属项目:</el-col>
+            <el-col :span="12">{{task.projectName}}</el-col>
+          </el-row>
+           <el-row :gutter="20" class="create-item">
+            <el-col :span="6" class="table-item-name">负责老师:</el-col>
+            <el-col :span="12">{{task.fromTeacherName}}</el-col>
+          </el-row>
+           <el-row :gutter="20" class="create-item">
+            <el-col :span="6" class="table-item-name">截止时间:</el-col>
+            <el-col :span="12">{{task.deadline}}</el-col>
+          </el-row>
+        </div>
+        </div>
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -21,11 +40,7 @@ export default {
   },
   data() {
     return {
-      activeNames: ["1"],
-      project: {},
-      memberNum: 0,
-      inviteDialog:false,
-      users: [{}],
+      task: {},
       uid: "",
     };
   },
@@ -34,10 +49,9 @@ export default {
       // console.log(val[0]);
       if (val.length > 0) {
         this.$api.get("/api/v1/task/" + val[0], {}, res => {
-        console.log(res);
+        this.task=res.data;
         });
       }
-      
     },
   }
 };

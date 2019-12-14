@@ -3,16 +3,16 @@
     <navCard v-bind:title="title" :subtitle="subtitle"></navCard>
     <div class="create-table">
       <el-row :gutter="20" class="create-item" style="margin-top:150px;">
-        <el-col :span="6" class="table-item-name">项目名称:</el-col>
+        <el-col :span="6" class="table-item-name">任务名称:</el-col>
         <el-col :span="12">
-          <el-input v-model="name"></el-input>
+          <el-input v-model="title"></el-input>
         </el-col>
       </el-row>
       <el-row :gutter="20" class="create-item">
-        <el-col :span="6" class="table-item-name">项目介绍:</el-col>
+        <el-col :span="6" class="table-item-name">任务介绍:</el-col>
         <el-col :span="12">
           <el-input
-            v-model="description"
+            v-model="content"
             class="description-input"
             :rows="7"
             type="textarea"
@@ -21,30 +21,26 @@
         </el-col>
       </el-row>
       <el-row :gutter="20" class="create-item">
-        <el-col :span="6" class="table-item-name">技术领域:</el-col>
-        <el-col :span="12">
-          <el-checkbox-group v-model="filed">
-            <el-checkbox v-for="item in fileds" :label="item" :key="item">{{item}}</el-checkbox>
-          </el-checkbox-group>
-        </el-col>
+        <el-col :span="6" class="table-item-name">任务指定人:</el-col>
+         <el-select v-model="studentId" filterable placeholder="请输入关键词">
+        <el-option v-for="item in users" :key="item.id" :label="item.username" :value="item.id"></el-option>
+      </el-select>
       </el-row>
       <el-row :gutter="20" class="create-item">
         <el-col :span="6" class="table-item-name">截止时间:</el-col>
         <el-col :span="12">
-        
             <el-date-picker
               v-model="deadline"
               align="right"
               type="date"
               placeholder="选择日期"
-              :picker-options="pickerOptions"
             ></el-date-picker>
          
         </el-col>
       </el-row>
       <el-row :gutter="20" class="create-item" style="margin-top:60px">
         <el-col :span="6" class="table-item-name">
-          <el-button @click="createProject()" class="create-button">创建</el-button>
+          <el-button @click="createTask()" class="create-button">创建</el-button>
         </el-col>
         <el-col :span="12">
           <el-button class="cancel-button" @click="cancel()">取消</el-button>
@@ -57,60 +53,31 @@
 export default {
   data() {
     return {
-      fileds: ["数据分析", "可视化", "WEB开发", "深度学习", "嵌入式"],
-      pickerOptions: {
-        disabledDate(time) {
-          return time.getTime() > Date.now();
-        },
-        shortcuts: [
-          {
-            text: "今天",
-            onClick(picker) {
-              picker.$emit("pick", new Date());
-            }
-          },
-          {
-            text: "明天",
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() + 3600 * 1000 * 24);
-              picker.$emit("pick", date);
-            }
-          },
-          {
-            text: "一周后",
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() + 3600 * 1000 * 24 * 7);
-              picker.$emit("pick", date);
-            }
-          }
-        ]
-      },
-      name: "",
-      description: "",
-      filed: [],
+      users:[{}],
+      title: "",
+      content: "",
       deadline: "",
-      title: "创建项目",
-      subtitle: "填写项目信息"
+      title: "创建任务",
+      subtitle: "填写任务信息",
+      studentId:'',
+      pid:''
     };
   },
   methods: {
-    createProject() {
-      console.log(this.filed);
+    createTask() {
       this.$api.post(
-        "/api/v1/admin/project",
+        "/api/v1/teacher/task",
         {
-          name: this.name,
-          description: this.description,
-          field: this.filed,
-          deadline: this.deadline
+          title: this.title,
+          content: this.content,
+          toStudent: this.studentid,
+          deadline: this.deadline,
+          project:this.pid
         },
         res => {
          if(res.data=="OK"){
             this.$message({ showClose: true , message: '创建成功' , type: 'success' });
          }
-
         }
       );
     },
