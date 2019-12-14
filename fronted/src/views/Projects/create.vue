@@ -31,13 +31,11 @@
       <el-row :gutter="20" class="create-item">
         <el-col :span="6" class="table-item-name">截止时间:</el-col>
         <el-col :span="12">
-        
             <el-date-picker
               v-model="deadline"
               align="right"
               type="date"
               placeholder="选择日期"
-              :picker-options="pickerOptions"
             ></el-date-picker>
          
         </el-col>
@@ -58,35 +56,6 @@ export default {
   data() {
     return {
       fileds: ["数据分析", "可视化", "WEB开发", "深度学习", "嵌入式"],
-      pickerOptions: {
-        disabledDate(time) {
-          return time.getTime() > Date.now();
-        },
-        shortcuts: [
-          {
-            text: "今天",
-            onClick(picker) {
-              picker.$emit("pick", new Date());
-            }
-          },
-          {
-            text: "明天",
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() + 3600 * 1000 * 24);
-              picker.$emit("pick", date);
-            }
-          },
-          {
-            text: "一周后",
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() + 3600 * 1000 * 24 * 7);
-              picker.$emit("pick", date);
-            }
-          }
-        ]
-      },
       name: "",
       description: "",
       filed: [],

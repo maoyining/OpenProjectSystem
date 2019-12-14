@@ -41,8 +41,7 @@
       </el-table-column>
       <el-table-column label="操作" width="230">
         <template slot-scope="props">
-          <span @click.stop="agreeProject(props.row)" v-if="role==3">同意</span>
-             <span @click.stop="agreeProjects(props.row)" v-if="role==2">同意</span>
+          <span @click.stop="agreeProject(props.row)" >同意</span>
           <span style="color:red" @click.stop="disagreeProject(props.row)" >拒绝</span>
           
         </template>
@@ -127,7 +126,7 @@ export default {
   },
   methods: {
     messages(){
-       this.$api.get("/api/v1/"+this.roles+"/message?state=8", {}, res => {
+       this.$api.get("/api/v1/"+this.roles+"/message", {}, res => {
       this.datasize = res.data.length;
       this.tableData = res.data;
     });
@@ -138,21 +137,6 @@ export default {
       this.$api.put("/api/v1/"+this.roles+"/agree",{
         uid:this.uid,
         pid:this.pid
-      },res=>{
-         if (res.data == "OK") {
-            this.$message({
-              showClose: true,
-              message: "已同意该申请",
-              type: "success"
-            });
-          }
-          this.messages();
-      })
-    },
-    agreeProjects(e) {
-      this.pid=e.id;
-      this.$api.put("/api/v1/"+this.roles+"/agree",{
-        id:this.pid
       },res=>{
          if (res.data == "OK") {
             this.$message({
@@ -180,22 +164,6 @@ export default {
           }
           this.messages();
       })
-    },
-    deleteProject(e) {
-      this.deleteDialog = true;
-      this.id = e;
-    },
-    cancel() {
-      this.deleteDialog = false;
-      this.editDialog = false;
-    },
-    deleteConfirm(e) {
-      console.log(e);
-      this.deleteDialog = false;
-    },
-    editConfirm(e) {
-      console.log(e);
-      this.editDialog = false;
     },
     rowClick(e) {
       this.$router.push({ path: "/project/" + e.id });

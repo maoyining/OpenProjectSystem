@@ -120,7 +120,7 @@ export default {
           key: 2,
           role: 2,
           submenu: [
-            { name: "申请审核", url: "/message/review", key: 21, role: 2 },
+            { name: "申请审核", url: "/message", key: 21, role: 2 },
             { name: "提交审核", url: "/404", key: 22, role: 2 },
           ]
         },
