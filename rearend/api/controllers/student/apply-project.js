@@ -31,11 +31,15 @@ module.exports = {
     if(p.currentSize===p.teamSize){
       throw 'conflict';
     }
-    await UserProject.create({
-      user:this.req.me.id,
-      project:inputs.id,
-      status:3
-    });
+    let res=await UserProject.findOne({user:this.req.me.id,project:inputs.id});
+    if(res){
+      throw 'conflict';
+    }
+    // await UserProject.create({
+    //   user:this.req.me.id,
+    //   project:inputs.id,
+    //   status:3
+    // });
     return;
 
   }
