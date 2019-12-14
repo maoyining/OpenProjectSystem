@@ -58,6 +58,11 @@ export default new Router({
       name:'Myproject',
       component: () => import('@/views/own/index')//我的项目列表显示
     },
+    {
+      path:'/task',
+      name:'MyTask',
+      component: () => import('@/views/task/task')//我的项目列表显示
+    },
   
   ]
 })

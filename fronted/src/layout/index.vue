@@ -132,7 +132,7 @@ export default {
           key: 1,
           role: 2,
           submenu: [{ name: "查看项目", url: "/project/show", key: 11, role: 2 },
-          { name: "我的任务", url: "/yyy", key: 12, role: 2 }]
+          { name: "我的任务", url: "/task", key: 12, role: 2 }]
         },
         {
           name: "所有项目",
