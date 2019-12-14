@@ -43,6 +43,9 @@ module.exports.routes = {
   'GET /api/v1/project/:id':'project.find-one',
   'GET /api/v1/project':'project.find-list',
 
+  //TASK
+  'GET /api/v1/task/:id':'task.find-one',
+
   //USER
   'GET /api/v1/user':'auth.findlist-user',
   'GET /api/v1/user/:id':'auth.findone-user',
