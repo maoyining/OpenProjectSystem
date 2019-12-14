@@ -3,7 +3,7 @@
      <navCard v-bind:title="title" :subtitle="subtitle" style="margin-left:-5px"></navCard>
       <div v-if="datasize>0">
     <div v-for="item in taskData" :key="item.yyy">
-      <projectCard :name="item.title" :status="item.status" :id="item.id" :role="role" style="margin-top:20px"></projectCard>
+      <projectCard :name="item.name"  :id="item.id" :role="role" style="margin-top:20px"></projectCard>
     </div>
       </div>
     <!-- <p>???</p> -->
@@ -33,7 +33,7 @@ export default {
   
   methods:{
       projects(){
-           this.$api.get("/api/v1/"+this.roles+"/task?state=", {}, res => {
+           this.$api.get("/api/v1/"+this.roles+"/project?state=2", {}, res => {
                this.datasize=res.data.length;
         this.taskData= res.data;
       });

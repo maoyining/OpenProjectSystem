@@ -5,19 +5,19 @@
         <template slot="title">
           <el-col :span="6" :offset="1" class="projectName">{{name}}</el-col>
         </template>
-
-        <el-table :data="tableData" row-key="ids" stripe >
+         <el-button @click.stop="newTask(id)">新建任务</el-button>
+        <el-table :data="tableData" row-key="ids" stripe style="margin-left:100px;">
           <el-table-column label="编号" width="180">
             <template slot-scope="props">{{props.$index+1}}</template>
           </el-table-column>
-          <el-table-column prop="name" label="任务名称" width="560"></el-table-column>
-          <el-table-column prop="leaderName" label="小组成员" width="220"></el-table-column>
+          <el-table-column prop="title" label="任务名称" width="560"></el-table-column>
+          <el-table-column prop="toStudentName" label="小组成员" width="220"></el-table-column>
           <el-table-column label="状态" width="180">
             <template slot-scope="props">
               <el-button
                 class="project-status-button"
                 v-bind:class="updateStatusCls(props.row.status) "
-              >{{props.row.status|projectStatus}}</el-button>
+              >{{props.row.status|taskStatus}}</el-button>
             </template>
           </el-table-column>
           <el-table-column label="截止时间" width="180">
@@ -27,12 +27,8 @@
           </el-table-column>
           <el-table-column label="操作" width="180">
             <template slot-scope="props">
-              <el-button
-                class="start"
-                style="color:white"
-                v-if="role!=1"
-                @click.stop="applyProject(props.row.id)"
-              >新建任务</el-button>
+              <el-button @click.stop="newTask(props.row.id)"
+              >审核任务</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -72,10 +68,13 @@ export default {
     handleChange(val) {
       // console.log(val[0]);
       if (val.length > 0) {
-        this.$api.get("/api/v1/task/" + val[0], {}, res => {
-          this.task = res.data;
+        this.$api.get("/api/v1/task/project/" + val[0], {}, res => {
+          this.tableData = res.data;
         });
       }
+    },
+    newTask(e){
+        this.$router.push({ path: "/task/new/" + e });
     }
   }
 };

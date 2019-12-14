@@ -5,7 +5,7 @@
       <el-row :gutter="20" class="create-item" style="margin-top:150px;">
         <el-col :span="6" class="table-item-name">任务名称:</el-col>
         <el-col :span="12">
-          <el-input v-model="title"></el-input>
+          <el-input v-model="taskTitle"></el-input>
         </el-col>
       </el-row>
       <el-row :gutter="20" class="create-item">
@@ -35,7 +35,6 @@
               type="date"
               placeholder="选择日期"
             ></el-date-picker>
-         
         </el-col>
       </el-row>
       <el-row :gutter="20" class="create-item" style="margin-top:60px">
@@ -54,7 +53,7 @@ export default {
   data() {
     return {
       users:[{}],
-      title: "",
+      taskTitle:"",
       content: "",
       deadline: "",
       title: "创建任务",
@@ -63,12 +62,16 @@ export default {
       pid:''
     };
   },
+  mounted(){
+      this.pid = this.$route.params.id;
+      
+  },
   methods: {
     createTask() {
       this.$api.post(
         "/api/v1/teacher/task",
         {
-          title: this.title,
+          title: this.taskTitle,
           content: this.content,
           toStudent: this.studentid,
           deadline: this.deadline,
