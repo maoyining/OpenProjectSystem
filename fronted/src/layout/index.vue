@@ -149,8 +149,8 @@ export default {
           key: 3,
           role: 2,
           submenu: [
-            { name: "我收到的", url: "/message", key: 31, role: 2 },
-            { name: "我发出的", url: "/cover", key: 32, rol2: 2 }
+            { name: "我收到的", url: "/message/student/receive", key: 31, role: 2 },
+            { name: "我发出的", url: "/message/student/send", key: 32, rol2: 2 }
           ]
         },
         {
@@ -197,8 +197,8 @@ export default {
           key: 3,
           role: 0,
           submenu: [
-            { name: "我收到的", url: "/message", key: 31},
-            {name: "我发出的",url: "/admin/project",key: 32,}
+            { name: "我收到的", url: "/message/teacher/receive", key: 31},
+            {name: "我发出的",url: "/message/teacher/send",key: 32,}
           ]
         },
         {

@@ -27,8 +27,8 @@
         <template slot-scope="props">{{props.$index+1}}</template>
       </el-table-column>
       <el-table-column prop="name" label="名称" width="500"></el-table-column>
-      <el-table-column prop="leaderName" label="申请人" width="220" v-if="role==2"></el-table-column>
-      <el-table-column prop="applyer" label="申请人" width="220" v-if="role==3"></el-table-column>
+      <el-table-column prop="applyer" label="申请人" width="220" ></el-table-column>
+     
       <el-table-column label="截止时间" width="250">
         <template slot-scope="props">
           <span>{{props.row.deadline|formatDate}}</span>
@@ -41,10 +41,11 @@
       </el-table-column>
       <el-table-column label="操作" width="230">
         <template slot-scope="props">
-          <span @click.stop="agreeProject(props.row)" v-if="role==3">同意</span>
-             <span @click.stop="agreeProjects(props.row)" v-if="role==2">同意</span>
-          <span style="color:red" @click.stop="disagreeProject(props.row)" >拒绝</span>
-          
+            {{props.row.state}}
+             <span @click.stop="agreeProject(props.row)" v-if="props.row.state==3">同意</span>
+          <span style="color:red" @click.stop="disagreeProject(props.row)" v-if="props.row.state==3">拒绝</span>
+          <span v-if="props.row.state==8" style="color:red">已被拒绝</span>
+         <span v-if="props.row.state==5" style="color:red">已加入</span>
         </template>
       </el-table-column>
     </el-table>
@@ -126,8 +127,11 @@ export default {
     this.messages();
   },
   methods: {
+      //5以在项目里
+      //3可以进行同意/不同意操作
+      //8学生拒绝了导师的请求
     messages(){
-       this.$api.get("/api/v1/"+this.roles+"/message?state=8", {}, res => {
+       this.$api.get("/api/v1/"+this.roles+"/message?state=3&state=5&state=8", {}, res => {
       this.datasize = res.data.length;
       this.tableData = res.data;
     });
@@ -138,21 +142,6 @@ export default {
       this.$api.put("/api/v1/"+this.roles+"/agree",{
         uid:this.uid,
         pid:this.pid
-      },res=>{
-         if (res.data == "OK") {
-            this.$message({
-              showClose: true,
-              message: "已同意该申请",
-              type: "success"
-            });
-          }
-          this.messages();
-      })
-    },
-    agreeProjects(e) {
-      this.pid=e.id;
-      this.$api.put("/api/v1/"+this.roles+"/agree",{
-        id:this.pid
       },res=>{
          if (res.data == "OK") {
             this.$message({

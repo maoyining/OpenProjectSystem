@@ -71,8 +71,29 @@ export default new Router({
     {
       path:'/task/new/:id',
       name:'CreateTask',
-      component: () => import('@/views/task/create')//我的项目列表显示
+      component: () => import('@/views/task/create')//新建任务
     },
+    {
+      path:'/message/teacher/send',
+      name:'SendMessageT',
+      component: () => import('@/views/messages/teacherSend')//导师发送的消息
+    },
+    {
+      path:'/message/teacher/receive',
+      name:'ReceiveMessageT',
+      component: () => import('@/views/messages/teacherReceive')//导师接收的消息
+    },
+    {
+      path:'/message/student/send',
+      name:'SendMessageS',
+      component: () => import('@/views/messages/studentSend')//学生发送的消息
+    },
+    {
+      path:'/message/student/receive',
+      name:'ReceiveMessageS',
+      component: () => import('@/views/messages/studentReceive')//学生接收的消息
+    },
+    
   
   ]
 })
