@@ -6,52 +6,7 @@
           <el-col :span="6" :offset="1" class="projectName">{{name}}</el-col>
           <el-col :span="6" :offset="10" class="project-status">{{status|projectStatus}}</el-col>
         </template>
-        <div class="projects">
-        <div class="projectDetail">
-          <el-row :gutter="20" class="create-item">
-            <el-col :span="6" class="table-item-name">任务介绍:</el-col>
-            <el-col :span="12">{{task.content}}</el-col>
-          </el-row>
-          <el-row :gutter="20" class="create-item">
-            <el-col :span="6" class="table-item-name">项目状态:</el-col>
-            <el-col :span="12">{{project.status|projectStatus}}</el-col>
-          </el-row>
-          <el-row :gutter="20" class="create-item">
-            <el-col :span="6" class="table-item-name">技术领域:</el-col>
-            <el-col :span="12">
-              <el-checkbox-group v-model="project.field">
-                <el-checkbox v-for="item in project.field" :label="item" :key="item">{{item}}</el-checkbox>
-              </el-checkbox-group>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" class="create-item">
-            <el-col :span="6" class="table-item-name">团队人数:</el-col>
-            <el-col :span="12">{{project.teamSize}}</el-col>
-          </el-row>
-          <el-row :gutter="20" class="create-item" v-if="memberNum>0">
-            <el-col :span="6" class="table-item-name">团队成员:</el-col>
-            <el-col :span="12">
-              <el-tag
-                :key="tag.id"
-                v-for="tag in project.member"
-                closable
-                :disable-transitions="false"
-                @close="handleClose(tag)"
-              >{{tag.username}}</el-tag>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" class="create-item">
-            <el-col :span="6" class="table-item-name">截止时间:</el-col>
-            <el-col :span="12">{{project.deadline|formatDate}}</el-col>
-          </el-row>
-        </div>
-        <div class="projectProcess">
-          <div class="process">
-            <div id="myChart" :style="{width: '300px', height: '300px'}"></div>
-          </div>
-        </div>
-        </div>
-      
+       
       </el-collapse-item>
     </el-collapse>
   </div>
@@ -79,8 +34,7 @@ export default {
       // console.log(val[0]);
       if (val.length > 0) {
         this.$api.get("/api/v1/task/" + val[0], {}, res => {
-          this.project = res.data;
-          this.memberNum = res.data.member.length;
+        console.log(res);
         });
       }
       
