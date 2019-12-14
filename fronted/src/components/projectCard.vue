@@ -46,16 +46,17 @@
           </el-row>
         </div>
         <div class="projectProcess">
-          <div class="processName">
-            项目完成度
-          </div>
           <div class="process">
-            项目已经完成：75%
+            <div id="myChart" :style="{width: '300px', height: '300px'}"></div>
           </div>
         </div>
         </div>
         <div>
-           <el-button @click="invite()" class="create-button" v-if="memberNum<project.teamSize">邀请同学</el-button>
+          <el-row>
+            <el-col :span="6" :offset="16">
+           <el-button @click="invite()" class="create-button" v-if="memberNum<project.teamSize&&role==3">邀请同学</el-button>
+            </el-col>
+          </el-row>
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -75,7 +76,8 @@ export default {
   props: {
     name: String,
     status: Number,
-    id: String
+    id: String,
+    role:String
   },
   data() {
     return {
@@ -96,6 +98,43 @@ export default {
           this.memberNum = res.data.member.length;
         });
       }
+      let myChart = this.$echarts.init(document.getElementById('myChart'))
+        // 绘制图表
+        myChart.setOption({
+          title : {
+              text: '项目完成进度',//主标题
+              subtext: '纯属虚构',//副标题
+              x:'center',//x轴方向对齐方式
+          },
+          tooltip : {
+              trigger: 'item',
+              formatter: "{a} <br/>{b} : {c} ({d}%)"
+          },
+          legend: {
+              orient: 'vertical',
+              bottom: 'bottom',
+              data: ['已完成','未完成']
+          },
+          series : [
+              {
+                  name: '访问来源',
+                  type: 'pie',
+                  radius : '55%',
+                  center: ['50%', '60%'],
+                  data:[
+                      {value:385, name:'已完成'},
+                      {value:310, name:'未完成'},    
+                  ],
+                  itemStyle: {
+                      emphasis: {
+                          shadowBlur: 10,
+                          shadowOffsetX: 0,
+                          shadowColor: 'rgba(0, 0, 0, 0.5)'
+                      }
+                  }
+              }
+          ]
+      });
     },
      //邀请学生，打开对话框
     invite() {
