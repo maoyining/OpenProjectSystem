@@ -18,7 +18,7 @@ module.exports = {
 
 
   fn: async function () {
-    let p = await UserProject.find({ status:4 });
+    let p = await UserProject.find({ user:this.req.me.id,status:4 });
     let project=[];
     let attributesToSelect = sails.helpers.getAttributesToSelect(this.req);
     for(let i in p){
@@ -29,9 +29,8 @@ module.exports = {
         select : attributesToSelect,
       };
       let v = await Project.findOne(query);
-      let a = await User.findOne({id:this.req.me.id});
+      let a = await User.findOne({id:v.leader});
       v.leaderName=a.username;
-      v.leader=a.id;
       v.state=p[i].status;
       project.push(v);
     }
