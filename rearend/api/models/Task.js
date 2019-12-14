@@ -19,6 +19,7 @@ module.exports = {
 
     content:{
       type:'string',
+      required:true
     },
 
     status:{   //  0 进行中  1截止
@@ -38,15 +39,18 @@ module.exports = {
     //项目
     project:{
       model:'user',
+      required:true
     },
 
     //任务发给的对象
     toStudent:{
-      model:'user'
+      model:'user',
+      required:true
     },
 
     fromTeacher:{
-      model:'user'
+      model:'user',
+      required:true
     }
 
 
