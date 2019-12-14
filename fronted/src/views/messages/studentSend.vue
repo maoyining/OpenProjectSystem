@@ -3,7 +3,7 @@
   <div v-if="datasize>0" class="messageClass">
     <div class="table-search">
       <el-row :gutter="24">
-        <el-col :span="4" class="table-title" :offset="1">我收到的消息</el-col>
+        <el-col :span="4" class="table-title" :offset="1">我发出的消息</el-col>
         <el-col :span="4" :offset="12">
           <el-input
             placeholder="请输入搜索条件"
@@ -41,10 +41,8 @@
       </el-table-column>
       <el-table-column label="操作" width="230">
         <template slot-scope="props">
-          <span @click.stop="agreeProject(props.row)" v-if="role==3">同意</span>
-             <span @click.stop="agreeProjects(props.row)" v-if="role==2">同意</span>
-          <span style="color:red" @click.stop="disagreeProject(props.row)" >拒绝</span>
-          
+          <span  v-if="props.row.state==3" >已发送</span>
+         <span style="color:red" v-if="props.row.state==8" >已拒绝</span>
         </template>
       </el-table-column>
     </el-table>
@@ -126,8 +124,10 @@ export default {
     this.messages();
   },
   methods: {
+      //3代表已发送申请
+      //8代表已拒绝导师
     messages(){
-       this.$api.get("/api/v1/"+this.roles+"/message?state=8", {}, res => {
+       this.$api.get("/api/v1/student/project?state=3&state=8", {}, res => {
       this.datasize = res.data.length;
       this.tableData = res.data;
     });

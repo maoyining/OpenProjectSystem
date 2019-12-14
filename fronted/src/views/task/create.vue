@@ -70,14 +70,15 @@ export default {
   },
   methods: {
     createTask() {
+        console.log(this.studentId)
       this.$api.post(
         "/api/v1/teacher/task",
         {
           title: this.taskTitle,
           content: this.content,
-          toStudent: this.studentid,
           deadline: this.deadline,
-          project:this.pid
+          project:this.pid,
+          toStudent: this.studentId,
         },
         res => {
             console.log(res);
