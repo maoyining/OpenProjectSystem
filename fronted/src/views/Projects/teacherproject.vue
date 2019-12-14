@@ -3,7 +3,7 @@
       <div v-if="datasize>0">
     <div v-for="item in projectData" :key="item.yyy">
       <projectCard :name="item.name" :status="item.status"
-      :description="item.description" :id="item.id"></projectCard>
+      :description="item.description" :id="item.id" :role="role" style="margin-top:20px"></projectCard>
     </div>
       </div>
     <!-- <p>???</p> -->
