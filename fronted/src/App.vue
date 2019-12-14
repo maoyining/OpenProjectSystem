@@ -1,17 +1,25 @@
 <template>
   <div id="app">
-  <layout></layout>
+    <div v-if="this.$store.state.token==null">
+      <login></login>
+    </div>
+ <div v-if="this.$store.state.token!=null">
+     <layout></layout>
+    </div>
+ 
     <!-- <img src="./assets/logo.png"> -->
     <!-- <router-view/> -->
   </div>
 </template>
 
 <script>
+import login from '@/views/Login.vue'
 import layout from './index'
 export default {
   name: 'App',
    components: {
-   layout
+   layout,
+   login
   },
 }
 
