@@ -65,6 +65,17 @@ Vue.filter('projectState', function(value) {
     return '未知状态';
   }
 });
+//任务的关系
+Vue.filter('taskStatus', function(value) {
+  if (value!=null) {
+    if(value==0)
+      return '未完成';//学生申请中
+    else
+      return '完成'
+  } else {
+    return '未知状态';
+  }
+});
 Vue.filter('formatDate', function(value) {
   if (value) {
     value = new Date(value);

@@ -63,6 +63,16 @@ export default new Router({
       name:'MyTask',
       component: () => import('@/views/task/task')//我的项目列表显示
     },
+    {
+      path:'/task/assign',
+      name:'AssignTask',
+      component: () => import('@/views/task/assign')//我的项目列表显示
+    },
+    {
+      path:'/task/new/:id',
+      name:'CreateTask',
+      component: () => import('@/views/task/create')//我的项目列表显示
+    },
   
   ]
 })
