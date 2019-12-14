@@ -23,7 +23,7 @@
       <el-row :gutter="20" class="create-item">
         <el-col :span="6" class="table-item-name">任务指定人:</el-col>
          <el-select v-model="studentId" filterable placeholder="请输入关键词">
-        <el-option v-for="item in users" :key="item.id" :label="item.username" :value="item.id"></el-option>
+        <el-option v-for="item in members" :key="item.id" :label="item.username" :value="item.id"></el-option>
       </el-select>
       </el-row>
       <el-row :gutter="20" class="create-item">
@@ -52,7 +52,7 @@
 export default {
   data() {
     return {
-      users:[{}],
+      members:[{}],
       taskTitle:"",
       content: "",
       deadline: "",
@@ -64,7 +64,9 @@ export default {
   },
   mounted(){
       this.pid = this.$route.params.id;
-      
+      this.$api.get("/api/v1/project/" + this.pid, {}, res => {
+          this.members=res.data.member;
+      })
   },
   methods: {
     createTask() {
@@ -78,6 +80,7 @@ export default {
           project:this.pid
         },
         res => {
+            console.log(res);
          if(res.data=="OK"){
             this.$message({ showClose: true , message: '创建成功' , type: 'success' });
          }
