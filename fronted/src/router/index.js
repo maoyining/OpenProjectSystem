@@ -93,6 +93,11 @@ export default new Router({
       name:'ReceiveMessageS',
       component: () => import('@/views/messages/studentReceive')//学生接收的消息
     },
+    {
+      path:'/404',
+      name:'404',
+      component:()=>import('@/views/404')
+    }
     
   
   ]

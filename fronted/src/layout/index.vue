@@ -159,8 +159,8 @@ export default {
           key: 4,
           role: 2,
           submenu: [
-            { name: "任务提交", url: "/acg", key: 41, role: 2 },
-            { name: "项目记录", url: "/reality", key: 42, role: 2 }
+            { name: "任务提交", url: "/404", key: 41, role: 2 },
+            { name: "项目记录", url: "/404", key: 42, role: 2 }
           ]
         },
         {
@@ -169,8 +169,8 @@ export default {
           key: 5,
           role: 2,
           submenu: [
-            { name: "查看信息", url: "/acg", key: 51, role: 2 },
-            { name: "修改信息", url: "/reality", key: 52, role: 2 }
+            { name: "查看信息", url: "/404", key: 51, role: 2 },
+            { name: "修改信息", url: "/404", key: 52, role: 2 }
           ]
         }
       ],
@@ -182,7 +182,7 @@ export default {
           submenu: [
             { name: "查看我的项目", url: "/project/show", key: 11 },
             { name: "任务分配", url: "/task/assign", key: 12 },
-            { name: "任务审核", url: "/task", key: 13 }
+            { name: "任务审核", url: "/404", key: 13 }
           ]
         },
         {
@@ -206,8 +206,8 @@ export default {
           url: "/message",
           key: 4,
           submenu: [
-            { name: "审核记录", url: "/original", key: 41, role: 2 },
-            { name: "项目提交", url: "/cover", key: 42, rol2: 2 }
+            { name: "审核记录", url: "/404", key: 41, role: 2 },
+            { name: "项目提交", url: "/404", key: 42, rol2: 2 }
           ]
         },
         {
@@ -216,8 +216,8 @@ export default {
           key: 5,
           role: 2,
           submenu: [
-            { name: "查看信息", url: "/acg", key: 51, role: 2 },
-            { name: "修改信息", url: "/reality", key: 52, role: 2 }
+            { name: "查看信息", url: "/404", key: 51, role: 2 },
+            { name: "修改信息", url: "/404", key: 52, role: 2 }
           ]
         }
       ]
