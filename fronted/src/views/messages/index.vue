@@ -27,8 +27,8 @@
         <template slot-scope="props">{{props.$index+1}}</template>
       </el-table-column>
       <el-table-column prop="name" label="名称" width="500"></el-table-column>
-      <el-table-column prop="applyer" label="申请人" width="220"></el-table-column>
-
+      <el-table-column prop="leaderName" label="申请人" width="220" v-if="role==2"></el-table-column>
+      <el-table-column prop="applyer" label="申请人" width="220" v-if="role==3"></el-table-column>
       <el-table-column label="截止时间" width="250">
         <template slot-scope="props">
           <span>{{props.row.deadline|formatDate}}</span>
@@ -41,7 +41,8 @@
       </el-table-column>
       <el-table-column label="操作" width="230">
         <template slot-scope="props">
-          <span @click.stop="agreeProject(props.row)" >同意</span>
+          <span @click.stop="agreeProject(props.row)" v-if="role==3">同意</span>
+             <span @click.stop="agreeProjects(props.row)" v-if="role==2">同意</span>
           <span style="color:red" @click.stop="disagreeProject(props.row)" >拒绝</span>
           
         </template>
@@ -137,6 +138,21 @@ export default {
       this.$api.put("/api/v1/"+this.roles+"/agree",{
         uid:this.uid,
         pid:this.pid
+      },res=>{
+         if (res.data == "OK") {
+            this.$message({
+              showClose: true,
+              message: "已同意该申请",
+              type: "success"
+            });
+          }
+          this.messages();
+      })
+    },
+    agreeProjects(e) {
+      this.pid=e.id;
+      this.$api.put("/api/v1/"+this.roles+"/agree",{
+        id:this.pid
       },res=>{
          if (res.data == "OK") {
             this.$message({

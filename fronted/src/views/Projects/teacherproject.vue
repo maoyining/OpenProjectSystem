@@ -1,11 +1,18 @@
 <template>
   <div class="project-teacher">
-      <div v-if="datasize>0">
-    <div v-for="item in projectData" :key="item.yyy">
-      <projectCard :name="item.name" :status="item.status"
-      :description="item.description" :id="item.id" :role="role" style="margin-top:20px"></projectCard>
-    </div>
+    <navCard v-bind:title="title" :subtitle="subtitle" style="margin-left:-5px"></navCard>
+    <div v-if="datasize>0">
+      <div v-for="item in projectData" :key="item.yyy">
+        <projectCard
+          :name="item.name"
+          :status="item.status"
+          :description="item.description"
+          :id="item.id"
+          :role="role"
+          style="margin-top:20px"
+        ></projectCard>
       </div>
+    </div>
     <!-- <p>???</p> -->
   </div>
 </template>
@@ -15,9 +22,11 @@ export default {
   data() {
     return {
       projectData: [{}],
-      role: "",
+      role: 0,
       roles: "",
-      datasize:0
+      datasize: 0,
+      title: "我的项目",
+      subtitle: "查看我的项目"
     };
   },
   components: { projectCard },
@@ -28,14 +37,22 @@ export default {
     if (this.role == 3) this.roles = "teacher";
     this.projects();
   },
-  methods:{
-      projects(){
-           this.$api.get("/api/v1/"+this.roles+"/project?state=", {}, res => {
-               this.datasize=res.data.length;
-        this.projectData= res.data;
-      });
-      console.log(this.projectData);
+  methods: {
+    projects() {
+      if (this.role == 2) {
+        this.$api.get("/api/v1/" + this.roles + "/project?state=5", {}, res => {
+          this.datasize = res.data.length;
+          this.projectData = res.data;
+        });
+      }else if (this.role == 3) {
+        this.$api.get("/api/v1/" + this.roles + "/project?state=2", {}, res => {
+          this.datasize = res.data.length;
+          this.projectData = res.data;
+        });
       }
+
+      console.log(this.projectData);
+    }
   }
 };
 </script>
