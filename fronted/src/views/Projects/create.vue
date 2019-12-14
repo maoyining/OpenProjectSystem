@@ -47,7 +47,7 @@
           <el-button @click="createProject()" class="create-button">创建</el-button>
         </el-col>
         <el-col :span="12">
-          <el-button class="cancel-button">取消</el-button>
+          <el-button class="cancel-button" @click="cancel()">取消</el-button>
         </el-col>
       </el-row>
     </div>
@@ -113,6 +113,9 @@ export default {
 
         }
       );
+    },
+    cancel(){
+      this.$router.go(-1);
     }
   }
 };

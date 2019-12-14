@@ -53,6 +53,8 @@ Vue.filter('projectState', function(value) {
       return '参与中';//学生已在项目里面
     else if(value==7)
       return '被拒绝';//学生被老师拒绝
+    else if(value==4)
+      return '邀请中';//学生被老师邀请中
     else if(value==1)
       return '申请中';//导师申请项目中
     else if(value==2)
