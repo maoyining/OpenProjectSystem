@@ -131,8 +131,8 @@ export default {
           url: "/project",
           key: 1,
           role: 2,
-          submenu: [{ name: "查看项目", url: "/", key: 21, role: 2 },
-          { name: "我的任务", url: "/", key: 21, role: 2 }]
+          submenu: [{ name: "查看项目", url: "/", key: 11, role: 2 },
+          { name: "我的任务", url: "/", key: 12, role: 2 }]
         },
         {
           name: "所有项目",
@@ -140,7 +140,7 @@ export default {
           key: 2,
           role: 2,
           submenu: [
-            { name: "查看所有项目", url: "/project/new", key: 21, role: 0 }
+            { name: "查看所有项目", url: "/", key: 21, role: 0 }
           ]
         },
         {
@@ -180,9 +180,9 @@ export default {
           url: "/project",
           key: 1,
           submenu: [
-            { name: "查看我的项目", url: "/", key: 11 },
-            { name: "任务分配", url: "/", key: 12 },
-            { name: "任务审核", url: "/", key: 13 }
+            { name: "查看我的项目", url: "/project/show", key: 11 },
+            { name: "任务分配", url: "/task/assign", key: 12 },
+            { name: "任务审核", url: "/task", key: 13 }
           ]
         },
         {

@@ -69,7 +69,7 @@
           </div>
          <!-- 学生主动申请项目 -->
           <!-- <el-button @click="applyProject()" class="create-button" v-if="role==2&&state==1">申请</el-button> -->
-          <el-button @click="applyProject()" class="create-button" v-if="role==2">同意</el-button>
+          <el-button @click="applyProject()" class="create-button" v-if="role==2">申请</el-button>
         </el-col>
         <el-col :span="12">
           <el-button class="cancel-button" @click="handleBack">取消</el-button>
@@ -141,7 +141,6 @@ export default {
   },
   mounted() {
     this.id = this.$route.params.id;
-    this.role = this.$store.state.role;
     this.role = this.$store.state.role;
     if (this.role == 1) this.roles = "admin";
     else if (this.role == 2) this.roles = "student";

@@ -29,6 +29,11 @@ export default new Router({
       component: NewProject//显示任务
     },
     {
+      path:'/project/show',
+      name:'Showproject',
+      component: () => import('@/views/Projects/teacherproject')//导师和学生项目列表显示
+    },
+    {
       path:'/project/:id',
       name:'ProjectDetail',
       component: () => import('@/views/Projects/show')//项目详情显示
@@ -53,5 +58,6 @@ export default new Router({
       name:'Myproject',
       component: () => import('@/views/own/index')//我的项目列表显示
     },
+  
   ]
 })

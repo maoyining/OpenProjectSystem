@@ -10,7 +10,7 @@
     </div>
     <el-table
       :data="tableData"
-      row-key="id"
+      row-key="ids"
       stripe
       style="width: 80%"
       @row-click="rowClick"
@@ -31,17 +31,16 @@
       </el-table-column>
       <el-table-column  label="截止时间" width="180">
           <template slot-scope="props">
-          <span
-           
-          >{{props.row.deadline|formatDate}}</span>
+          <span>{{props.row.deadline|formatDate}}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" width="180">
         <template slot-scope="props">
+          <el-button class="start" style="color:white" v-if="role!=1" @click.stop="applyProject(props.row.id)">申请项目</el-button>
           <i
             class="el-icon-edit clickable"
             @click.stop="editProject(props.row)"
-            v-if="props.row.status==0"
+            v-if="role==1"
           ></i>
           <el-dialog title="修改项目" :visible.sync="editDialog">
             <el-row :gutter="20">
@@ -78,11 +77,18 @@
             class="el-icon-delete clickable"
             style="color:red"
             @click.stop="deleteProject(props.row.id)"
+            v-if="role==1"
           ></i>
           <el-dialog title="删除项目" :visible.sync="deleteDialog">
             <span slot="footer" class="dialog-footer">
               <el-button @click.stop="cancel">取消</el-button>
               <el-button type="primary" @click.stop="deleteConfirm(id)">确定</el-button>
+            </span>
+          </el-dialog>
+           <el-dialog title="申请项目" :visible.sync="applyDialog">
+            <span slot="footer" class="dialog-footer">
+              <el-button @click.stop="cancel">取消</el-button>
+              <el-button type="primary" @click.stop="applyConfirm(id)">确定</el-button>
             </span>
           </el-dialog>
         </template>
@@ -114,9 +120,11 @@ export default {
       editDialog: false,
       editData: [],
       deleteDialog: false,
+      applyDialog:false,
       id: "",
       searchData:'',
       role:'',
+      roles:""
     };
   },
   components: {
@@ -137,7 +145,10 @@ export default {
     }
   },
   mounted() {
-    this.role=this.$store.state.role;
+     this.role = this.$store.state.role;
+    if (this.role == 1) this.roles = "admin";
+    else if (this.role == 2) this.roles = "student";
+    if (this.role == 3) this.roles = "teacher";
     if(this.role==1){
         this.$api.get("/api/v1/project", {}, res => {
             this.datasize = res.data.length;
@@ -171,6 +182,7 @@ export default {
     cancel() {
       this.deleteDialog = false;
       this.editDialog = false;
+      this.applyDialog=false;
     },
     deleteConfirm(e) {
       console.log(e);
@@ -182,7 +194,30 @@ export default {
     },
     rowClick(e) {
       this.$router.push({ path: "/project/" + e.id });
-    }
+    },
+    applyProject(e) {
+      this.applyDialog = true;
+      this.id = e;
+    },
+     //学生和导师申请
+    applyConfirm() {
+      this.$api.post(
+        "/api/v1/" + this.roles + "/project",
+        {
+          id: this.id
+        },
+        res => {
+          if (res.data == "OK") {
+            this.$message({
+              showClose: true,
+              message: "申请成功，等待回复",
+              type: "success"
+            });
+          }
+        this.applyDialog=false;
+        }
+      );
+    },
   }
 };
 </script>

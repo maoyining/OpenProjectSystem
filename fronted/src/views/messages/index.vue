@@ -1,8 +1,9 @@
 <template>
+<div>
   <div v-if="datasize>0" class="messageClass">
     <div class="table-search">
       <el-row :gutter="24">
-        <el-col :span="4" class="table-title" :offset="1">审核项目申请</el-col>
+        <el-col :span="4" class="table-title" :offset="1">我收到的消息</el-col>
         <el-col :span="4" :offset="12">
           <el-input
             placeholder="请输入搜索条件"
@@ -60,6 +61,23 @@
       </el-row>
     </div>
   </div>
+   <div v-if="datasize==0" class="messageClass">
+      <div class="table-search">
+      <el-row :gutter="24">
+        <el-col :span="4" class="table-title" :offset="1">我收到的消息</el-col>
+        <el-col :span="4" :offset="12">
+          <el-input
+            placeholder="请输入搜索条件"
+            class="search-input"
+            clearable
+            v-model="searchData"
+            prefix-icon="el-icon-search"
+          ></el-input>
+        </el-col>
+      </el-row>
+    </div>
+   </div>
+</div>
 </template>
 
 <script>
