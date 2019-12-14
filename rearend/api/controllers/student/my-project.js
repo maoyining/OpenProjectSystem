@@ -9,7 +9,7 @@ module.exports = {
 
   inputs: {
     state:{
-      type:'number'
+      type:'ref'
     }
   },
 
@@ -19,6 +19,7 @@ module.exports = {
   },
 
   fn: async function (inputs) {
+    console.log(inputs.state);
     let p = await UserProject.find({ user:this.req.me.id ,status:inputs.state});
     let project=[];
     let attributesToSelect = sails.helpers.getAttributesToSelect(this.req);

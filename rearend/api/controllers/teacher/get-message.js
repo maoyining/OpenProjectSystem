@@ -8,7 +8,9 @@ module.exports = {
 
 
   inputs: {
-
+    state:{
+      type:'ref' //3,4,5,7,8
+    }
   },
 
 
@@ -17,8 +19,8 @@ module.exports = {
   },
 
 
-  fn: async function () {
-    let p = await UserProject.find({ status:3 });
+  fn: async function (inputs) {
+    let p = await UserProject.find({ status:inputs.state });
     let project=[];
     let attributesToSelect = sails.helpers.getAttributesToSelect(this.req);
     for(let i in p){
@@ -33,7 +35,7 @@ module.exports = {
       v.applyer=a.username;
       v.applyerID=a.id;
       v.state=p[i].status;
-      if(v.leader===this.req.me.id){
+      if(v.leader!==null&&v.leader===this.req.me.id){
         project.push(v);
       }
     }

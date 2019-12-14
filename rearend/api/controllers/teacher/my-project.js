@@ -9,7 +9,7 @@ module.exports = {
 
   inputs: {
     state:{
-      type:'number',
+      type:'ref', //1,2,6
     }
   },
 
