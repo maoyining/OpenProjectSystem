@@ -16,7 +16,7 @@
     </el-header>
     <el-container style="margin-top:39px;">
       <el-aside class="asideClass">
-        <myMenu></myMenu>
+        <myMenu :role="role"></myMenu>
       </el-aside>
       <el-main class="mainClass">
         <router-view />
@@ -33,6 +33,9 @@ export default {
     // 计算属性的 getter
     username() {
       return this.$store.state.username;
+    },
+    role(){
+      return this.$store.state.role;
     }
   },
   methods:{

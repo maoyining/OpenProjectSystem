@@ -99,10 +99,12 @@
 </style>
 <script>
 export default {
+  props:{
+    role:Number
+  },
   data() {
     return {
       isCollapse: false,
-      role: "",
       linka: [
         {
           name: "所有项目",
